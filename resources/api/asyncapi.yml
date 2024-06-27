@@ -1,0 +1,149 @@
+asyncapi: 2.6.0
+info:
+    title: 'MerchantApp AsyncAPI definition.'
+    version: 0.1.0
+channels:
+    merchant-app-events:
+        subscribe:
+            message:
+                oneOf:
+                    - $ref: '#/components/messages/ReadyForMerchantAppOnboarding'
+                    - $ref: '#/components/messages/MerchantAppOnboardingStatusChanged'
+
+components:
+    messages:
+        ReadyForMerchantAppOnboarding:
+            x-spryker:
+                module: AppMerchant
+            name: ReadyForMerchantAppOnboarding
+            title: Inform about the App readiness for the Merchant onboarding.
+            summary: The message is sent by this App to inform the Tenant that it is ready to onboard Merchants.
+            headers:
+                $ref: '#/components/schemas/message-broker/components/schemas/headers'
+            payload:
+                $ref: '#/components/schemas/ReadyForMerchantAppOnboarding'
+
+        MerchantAppOnboardingStatusChanged:
+            x-spryker:
+                module: AppMerchant
+            name: MerchantAppOnboardingStatusChanged
+            title: Inform about a Merchant onboarding status change.
+            summary: The message is sent by an App to inform the Tenant that the Merchant onboarding status has been changed.
+            headers:
+                $ref: '#/components/schemas/message-broker/components/schemas/headers'
+            payload:
+                $ref: '#/components/schemas/MerchantAppOnboardingStatusChanged'
+
+    schemas:
+        ReadyForMerchantAppOnboarding:
+            type: object
+            properties:
+                onboarding:
+                    type: object
+                    properties:
+                        url:
+                            type: string
+                            description: The URI of the App Merchant onboarding endpoint.
+                        strategy:
+                            type: string
+                            description: The onboarding strategy this App supports for initialization of the Merchant onboarding process. This describes the way the Tenant can interact with the App to onboard Merchants.
+                            enum:
+                                - iframe
+                                - redirect
+                                - api
+                type:
+                    type: string
+                    description: The category of the App.
+                    examples:
+                        - payment
+                        - pim
+
+                appName:
+                    type: string
+                    description: The name of the App.
+                    examples:
+                        - Stripe
+                        - Algolia
+
+                appIdentifier:
+                    type: string
+                    description: The identifier of the App.
+                    examples:
+                        - app-12345-6789-abcd-efgh
+
+                additionalLinks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Link'
+                    description: Additional URLs that are needed for the onboarding process or displayed for merchants.
+
+                merchantOnboardingStates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/MerchantOnboardingStatus'
+                    description: Status Map that are needed for the onboarding process to display specific texts.
+
+            required:
+                - onboarding.url
+                - onboarding.strategy
+                - type
+                - appName
+                - appIdentifier
+
+        MerchantAppOnboardingStatusChanged:
+            type: object
+            properties:
+                merchantReference:
+                    type: string
+                    description: The reference of the Merchant.
+                appIdentifier:
+                    type: string
+                    description: The identifier of the App.
+                type:
+                    type: string
+                    description: E.g. The category of the App.
+                    examples:
+                        - payment
+                        - pim
+                status:
+                    type: string
+                    description: The status of the onboarding.
+            required:
+                - merchantReference
+                - appIdentifier
+                - status
+                - type
+
+        Link:
+            type: object
+            properties:
+                label:
+                    type: string
+                url:
+                    type: string
+                attributes:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: Key-value object with HTML or other attributes that can be used in the UI logic. https://swagger.io/docs/specification/data-models/dictionaries/
+                    example:
+                        target: _blank
+                        title: 'Click here to open the App in a new tab.'
+
+        MerchantOnboardingStatus:
+            type: object
+            properties:
+                name:
+                    type: string
+                attributes:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: Key-value object with HTML or other attributes that can be used in the UI logic. https://swagger.io/docs/specification/data-models/dictionaries/
+                    example:
+                        displayText: 'Some text to be displayed'
+                        buttonText: 'Text for a button.'
+                        buttonInfo: 'Info text for a button.'
+
+        message-broker:
+            $ref: 'https://raw.githubusercontent.com/spryker/message-broker/1.6.0/resources/api/template.yml'

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:databuilder-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:databuilder-01 http://static.spryker.com/databuilder-01.xsd">
+    <transfer name="MerchantAppOnboardingRequest" strict="true">
+        <property name="cancelUrl" dataBuilderRule="word()"/>
+        <property name="errorUrl" dataBuilderRule="word()"/>
+        <property name="successUrl" dataBuilderRule="word()"/>
+    </transfer>
+
+    <transfer name="MerchantAppOnboardingResponse" strict="true">
+        <property name="strategy" dataBuilderRule="word()"/>
+        <property name="url" dataBuilderRule="word()"/>
+        <property name="content" dataBuilderRule="word()"/>
+    </transfer>
+
+</transfers>
+

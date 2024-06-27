@@ -1,0 +1,36 @@
+namespace: SprykerTest\AsyncApi\AppMerchant
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output
+coverage:
+    enabled: true
+    remote: false
+    whitelist:
+        include:
+            - '../../../../src/Spryker/*/AppMerchant/*'
+suites:
+    AsyncApi:
+        path: AppMerchantTests
+        actor: AppMerchantAsyncApiTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\AppMerchant\Helper\AppMerchantHelper
+                - \SprykerTest\Zed\AppKernel\Helper\AppKernelHelper
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                -
+                    \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces:
+                            - Spryker
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+                -
+                    \Spryker\Zed\TestifyAsyncApi\Business\Codeception\Helper\AsyncApiHelper:
+                        asyncapi: resources/api/asyncapi.yml

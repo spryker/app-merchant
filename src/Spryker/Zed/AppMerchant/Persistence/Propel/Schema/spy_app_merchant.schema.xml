@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\AppMerchant\Persistence" package="src.Orm.Zed.AppMerchant.Persistence">
+    <table name="spy_merchant" idMethod="native">
+        <column name="id_merchant" type="INTEGER" required="true" autoIncrement="true" primaryKey="true"/>
+        <column name="merchant_reference" type="VARCHAR" required="true"/>
+        <column name="tenant_identifier" type="VARCHAR" required="true"/>
+        <column name="config" type="LONGVARCHAR" description="JSON data that will be used for configuration purposes of this merchant"/>
+
+        <unique name="spy_merchant-unique-merchant_reference-tenant_identifier">
+            <unique-column name="merchant_reference"/>
+            <unique-column name="tenant_identifier"/>
+        </unique>
+
+        <behavior name="timestampable"/>
+    </table>
+</database>
