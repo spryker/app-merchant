@@ -10,8 +10,7 @@ namespace Spryker\Zed\AppMerchant\Business;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
-use Generated\Shared\Transfer\MerchantCriteriaTransfer;
-use Generated\Shared\Transfer\MerchantTransfer;
+use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -60,8 +59,9 @@ class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInter
      *
      * @api
      */
-    public function findMerchant(MerchantCriteriaTransfer $merchantCriteriaTransfer): ?MerchantTransfer
-    {
-        return $this->getRepository()->findMerchant($merchantCriteriaTransfer);
+    public function extendPaymentsTransmissionsRequest(
+        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
+    ): PaymentsTransmissionsRequestTransfer {
+        return $this->getFactory()->createPaymentsTransmissionsRequestExtender()->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
     }
 }

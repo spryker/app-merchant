@@ -23,4 +23,9 @@ class MessageBuilder
     {
         return sprintf('Could not find a Merchant by merchantReference "%s" and TenantIdentifier "%s"', $merchantReference, $tenantIdentifier);
     }
+
+    public static function merchantByReferenceNotFound(string $merchantReference): string
+    {
+        return sprintf('Merchant with reference "%s" not found.', $merchantReference);
+    }
 }

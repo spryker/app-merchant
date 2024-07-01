@@ -10,8 +10,7 @@ namespace Spryker\Zed\AppMerchant\Business;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
-use Generated\Shared\Transfer\MerchantCriteriaTransfer;
-use Generated\Shared\Transfer\MerchantTransfer;
+use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 
@@ -59,10 +58,13 @@ interface AppMerchantFacadeInterface
 
     /**
      * Specification:
-     * - Finds a merchant created by {@link self::createMerchantAppOnboarding()} method.
-     * - Requires merchantReference and tenantIdentifier to be set in the `MerchantCriteriaTransfer`.
+     * - Filters all order items that do not have a merchantReference.
+     * - Groups order items by order reference and merchant reference.
+     * - Creates a new `PaymentsTransmissionsRequestTransfer` with the order items grouped by order reference and merchant reference.
      *
      * @api
      */
-    public function findMerchant(MerchantCriteriaTransfer $merchantCriteriaTransfer): ?MerchantTransfer;
+    public function extendPaymentsTransmissionsRequest(
+        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
+    ): PaymentsTransmissionsRequestTransfer;
 }

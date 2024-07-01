@@ -8,13 +8,10 @@
 namespace Spryker\Zed\AppMerchant\Dependency\Facade;
 
 use Generated\Shared\Transfer\AppConfigCriteriaTransfer;
-use Generated\Shared\Transfer\AppConfigResponseTransfer;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface AppMerchantToAppKernelFacadeInterface
 {
-    public function saveConfig(AppConfigTransfer $appConfigTransfer): AppConfigResponseTransfer;
-
     public function getConfig(AppConfigCriteriaTransfer $appConfigCriteriaTransfer, TransferInterface $transfer): AppConfigTransfer;
 }
