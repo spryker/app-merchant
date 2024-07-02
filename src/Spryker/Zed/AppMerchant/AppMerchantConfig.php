@@ -31,17 +31,26 @@ class AppMerchantConfig extends AbstractBundleConfig
         return $this->getStringValue(AppKernelConstants::APP_IDENTIFIER);
     }
 
-    // TODO can we move this to another place?
-    // It should be provided by the "using" module.
-
     public function getOnboardingType(): string
     {
-        return 'payment';
+        return 'SET THIS ON PROJECT LEVEL';
     }
 
     protected function getStringValue(string $configKey): string
     {
         /** @phpstan-var string */
         return $this->get($configKey);
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getHandleableWebhookTypes(): array
+    {
+        return [
+            'account',
+        ];
     }
 }

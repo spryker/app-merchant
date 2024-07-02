@@ -24,7 +24,7 @@ class AccountUpdatedWebhookHandlerPlugin extends AbstractPlugin implements Webho
 {
     public function canHandle(WebhookRequestTransfer $webhookRequestTransfer): bool
     {
-        return true; // TODO Needs implementation
+        return in_array($webhookRequestTransfer->getType(), $this->getConfig()->getHandleableWebhookTypes());
     }
 
     public function handleWebhook(WebhookRequestTransfer $webhookRequestTransfer, WebhookResponseTransfer $webhookResponseTransfer): WebhookResponseTransfer
