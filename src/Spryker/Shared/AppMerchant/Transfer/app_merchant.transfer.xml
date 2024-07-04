@@ -108,6 +108,7 @@
     <transfer name="PaymentsTransmissionsRequest" strict="true">
         <property name="orderItems" type="OrderItem[]" singular="orderItem"/>
         <property name="paymentsTransmissions" type="PaymentTransmission[]" singular="paymentTransmission"/>
+        <property name="failedPaymentsTransmissions" type="PaymentTransmission[]" singular="failedPaymentTransmission"/>
     </transfer>
 
     <transfer name="OrderItem" strict="true">

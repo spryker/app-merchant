@@ -1650,7 +1650,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:spryker/app-payment.git",
-                "reference": "bdddfc005e22a425deb5c8e82914cfa60bf7a7fa"
+                "reference": "eb12217a1a0028e64f5f45b3480d00cd4d84be5b"
             },
             "require": {
                 "php": ">=8.1",
@@ -1687,7 +1687,7 @@
                 "rector/rector": "^0.19.0",
                 "spryker-sdk/async-api": "dev-feature/resolve-remote-references as 0.3.1",
                 "spryker/app-kernel": "dev-feature/extract-payment-template",
-                "spryker/app-merchant": "dev-feature/app-merchant-extraction",
+                "spryker/app-merchant": "dev-feature/acp-2626/master-stripe-marketplace-payment-flow-marketplace-oms-workflow-transfers-to-merchants",
                 "spryker/code-sniffer": "*",
                 "spryker/container": "*",
                 "spryker/development": "^3.34.0",
@@ -1705,6 +1705,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+                    "dev-feature/acp-2626/master-stripe-marketplace-payment-flow-marketplace-oms-workflow-transfers-to-merchants": "1.0.x-dev",
                     "dev-feature/app-payment-extraction": "1.0.x-dev",
                     "dev-main": "1.0.x-dev"
                 }
@@ -1730,7 +1731,7 @@
             },
             "scripts": {
                 "setup": [
-                    "tests/bin/console app-payment:setup && tests/bin/console transfer:generate && tests/bin/console transfer:databuilder:generate && tests/bin/console dev:ide-auto-completion:zed:generate && tests/bin/console dev:ide-auto-completion:glue:generate && tests/bin/console propel:install"
+                    "tests/bin/console app-payment:setup && tests/bin/console transfer:generate && tests/bin/console transfer:databuilder:generate && tests/bin/console dev:ide-auto-completion:zed:generate && tests/bin/console dev:ide-auto-completion:glue:generate && tests/bin/console propel:install && vendor/bin/codecept build"
                 ],
                 "cs-check": [
                     "phpcs -p src/ tests/"
@@ -1767,7 +1768,7 @@
                 "proprietary"
             ],
             "description": "AppPayment module",
-            "time": "2024-07-01T08:00:50+00:00"
+            "time": "2024-07-04T06:49:29+00:00"
         },
         {
             "name": "spryker/app-webhook",
@@ -9015,16 +9016,16 @@
     "packages-dev": [
         {
             "name": "async-aws/core",
-            "version": "1.21.0",
+            "version": "1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/async-aws/core.git",
-                "reference": "eb23cc59515d8d529163313bbf9e02f666e515ef"
+                "reference": "cbd7012890a35a9b21f7235817a627488709551b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/async-aws/core/zipball/eb23cc59515d8d529163313bbf9e02f666e515ef",
-                "reference": "eb23cc59515d8d529163313bbf9e02f666e515ef",
+                "url": "https://api.github.com/repos/async-aws/core/zipball/cbd7012890a35a9b21f7235817a627488709551b",
+                "reference": "cbd7012890a35a9b21f7235817a627488709551b",
                 "shasum": ""
             },
             "require": {
@@ -9046,7 +9047,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.21-dev"
+                    "dev-master": "1.22-dev"
                 }
             },
             "autoload": {
@@ -9067,7 +9068,7 @@
                 "sts"
             ],
             "support": {
-                "source": "https://github.com/async-aws/core/tree/1.21.0"
+                "source": "https://github.com/async-aws/core/tree/1.22.0"
             },
             "funding": [
                 {
@@ -9079,20 +9080,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-27T14:44:12+00:00"
+            "time": "2024-07-03T17:28:59+00:00"
         },
         {
             "name": "async-aws/sns",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/async-aws/sns.git",
-                "reference": "7605677369ba19c465ca4a74cf76b7bed2b1f89d"
+                "reference": "0a70db0ffa8561591bbca2dffdf81848323c3805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/async-aws/sns/zipball/7605677369ba19c465ca4a74cf76b7bed2b1f89d",
-                "reference": "7605677369ba19c465ca4a74cf76b7bed2b1f89d",
+                "url": "https://api.github.com/repos/async-aws/sns/zipball/0a70db0ffa8561591bbca2dffdf81848323c3805",
+                "reference": "0a70db0ffa8561591bbca2dffdf81848323c3805",
                 "shasum": ""
             },
             "require": {
@@ -9125,7 +9126,7 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/async-aws/sns/tree/1.7.2"
+                "source": "https://github.com/async-aws/sns/tree/1.7.3"
             },
             "funding": [
                 {
@@ -9137,7 +9138,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-14T07:34:42+00:00"
+            "time": "2024-07-03T17:28:59+00:00"
         },
         {
             "name": "async-aws/sqs",
@@ -9253,16 +9254,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.315.2",
+            "version": "3.315.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "0d9911bf67e0f2c4b6965d7f10840b11f323e6b2"
+                "reference": "3e6d619d45d8e1a8681dd58de61ddfe90e8341e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0d9911bf67e0f2c4b6965d7f10840b11f323e6b2",
-                "reference": "0d9911bf67e0f2c4b6965d7f10840b11f323e6b2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3e6d619d45d8e1a8681dd58de61ddfe90e8341e6",
+                "reference": "3e6d619d45d8e1a8681dd58de61ddfe90e8341e6",
                 "shasum": ""
             },
             "require": {
@@ -9342,9 +9343,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.315.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.315.5"
             },
-            "time": "2024-06-28T19:07:22+00:00"
+            "time": "2024-07-03T18:12:51+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -12341,16 +12342,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.0.2",
+            "version": "v5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
                 "shasum": ""
             },
             "require": {
@@ -12361,7 +12362,7 @@
             },
             "require-dev": {
                 "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -12393,9 +12394,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
             },
-            "time": "2024-03-05T20:51:40+00:00"
+            "time": "2024-07-01T20:03:41+00:00"
         },
         {
             "name": "nyholm/dsn",
@@ -15063,12 +15064,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spryker/app-kernel.git",
-                "reference": "edaeec885a753a360757acedda4c18bf6c74e4c5"
+                "reference": "d5882ef31305d138da35005be6b549ad21c598a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spryker/app-kernel/zipball/edaeec885a753a360757acedda4c18bf6c74e4c5",
-                "reference": "edaeec885a753a360757acedda4c18bf6c74e4c5",
+                "url": "https://api.github.com/repos/spryker/app-kernel/zipball/d5882ef31305d138da35005be6b549ad21c598a5",
+                "reference": "d5882ef31305d138da35005be6b549ad21c598a5",
                 "shasum": ""
             },
             "require": {
@@ -15124,7 +15125,7 @@
                 "issues": "https://github.com/spryker/app-kernel/issues",
                 "source": "https://github.com/spryker/app-kernel/tree/feature/extract-payment-template"
             },
-            "time": "2024-06-28T08:52:57+00:00"
+            "time": "2024-07-03T04:44:13+00:00"
         },
         {
             "name": "spryker/app-kernel-extension",

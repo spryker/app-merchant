@@ -39,13 +39,32 @@ class AppMerchantFacadeTest extends Unit
         $merchantTransfer = $this->tester->haveMerchantPersisted();
 
         $merchantAppOnboardingRequestTransfer = (new MerchantCriteriaTransfer())
-            ->setTenantIdentifier($merchantTransfer->getTenantIdentifier())
-            ->setMerchantReference($merchantTransfer->getMerchantReference());
+            ->setMerchantReference($merchantTransfer->getMerchantReference())
+            ->setTenantIdentifier($merchantTransfer->getTenantIdentifier());
 
         // Act
         $merchantTransfer = $this->tester->getFacade()->findMerchant($merchantAppOnboardingRequestTransfer);
 
         // Assert
         $this->assertInstanceOf(MerchantTransfer::class, $merchantTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindMerchantReturnsNullWhenMerchantWasNotFound(): void
+    {
+        // Arrange
+        $merchantTransfer = $this->tester->haveMerchant();
+
+        $merchantAppOnboardingRequestTransfer = (new MerchantCriteriaTransfer())
+            ->setMerchantReference($merchantTransfer->getMerchantReference())
+            ->setTenantIdentifier($merchantTransfer->getTenantIdentifier());
+
+        // Act
+        $merchantTransfer = $this->tester->getFacade()->findMerchant($merchantAppOnboardingRequestTransfer);
+
+        // Assert
+        $this->tester->assertNull($merchantTransfer);
     }
 }

@@ -3,9 +3,9 @@ use Propel\Generator\Manager\MigrationManager;
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1719820508.
- * Generated on 2024-07-01 07:55:08 by reneklatt */
-class PropelMigration_1719820508{
+ * up to version 1720076569.
+ * Generated on 2024-07-04 07:02:49 by reneklatt */
+class PropelMigration_1720076569{
     /**
      * @var string
      */
@@ -63,24 +63,7 @@ class PropelMigration_1719820508{
 
 PRAGMA foreign_keys = OFF;
 
-CREATE TABLE [spy_payment_transfer]
-(
-    [id_payment_transfer] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    [amount] INTEGER,
-    [commission] INTEGER,
-    [item_references] MEDIUMTEXT,
-    [merchant_reference] CHAR(36),
-    [order_reference] CHAR(36),
-    [tenant_identifier] CHAR(60),
-    [transaction_id] CHAR(36),
-    [transfer_id] CHAR(36),
-    [created_at] TIMESTAMP,
-    [updated_at] TIMESTAMP,
-    UNIQUE ([tenant_identifier],[transaction_id],[transfer_id],[merchant_reference]),
-    UNIQUE ([id_payment_transfer])
-);
-
-CREATE TEMPORARY TABLE [spy_app_config__temp__668260dcbf76a] AS SELECT [id_app_config],[tenant_identifier],[is_active],[config],[status],[created_at],[updated_at] FROM [spy_app_config];
+CREATE TEMPORARY TABLE [spy_app_config__temp__66864919d25c7] AS SELECT [id_app_config],[tenant_identifier],[is_active],[config],[status],[created_at],[updated_at] FROM [spy_app_config];
 DROP TABLE [spy_app_config];
 
 CREATE TABLE [spy_app_config]
@@ -96,10 +79,10 @@ CREATE TABLE [spy_app_config]
     UNIQUE ([id_app_config])
 );
 
-INSERT INTO [spy_app_config] (id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at) SELECT id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at FROM [spy_app_config__temp__668260dcbf76a];
-DROP TABLE [spy_app_config__temp__668260dcbf76a];
+INSERT INTO [spy_app_config] (id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at) SELECT id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at FROM [spy_app_config__temp__66864919d25c7];
+DROP TABLE [spy_app_config__temp__66864919d25c7];
 
-CREATE TEMPORARY TABLE [spy_currency_store__temp__668260dcbf7e2] AS SELECT [id_currency_store],[fk_currency],[fk_store] FROM [spy_currency_store];
+CREATE TEMPORARY TABLE [spy_currency_store__temp__66864919d2637] AS SELECT [id_currency_store],[fk_currency],[fk_store] FROM [spy_currency_store];
 DROP TABLE [spy_currency_store];
 
 CREATE TABLE [spy_currency_store]
@@ -117,10 +100,10 @@ CREATE INDEX [index-spy_currency_store-fk_currency] ON [spy_currency_store] ([fk
 
 CREATE INDEX [index-spy_currency_store-fk_store] ON [spy_currency_store] ([fk_store]);
 
-INSERT INTO [spy_currency_store] (id_currency_store, fk_currency, fk_store) SELECT id_currency_store, fk_currency, fk_store FROM [spy_currency_store__temp__668260dcbf7e2];
-DROP TABLE [spy_currency_store__temp__668260dcbf7e2];
+INSERT INTO [spy_currency_store] (id_currency_store, fk_currency, fk_store) SELECT id_currency_store, fk_currency, fk_store FROM [spy_currency_store__temp__66864919d2637];
+DROP TABLE [spy_currency_store__temp__66864919d2637];
 
-CREATE TEMPORARY TABLE [spy_glossary_key__temp__668260dcbf84c] AS SELECT [id_glossary_key],[key],[is_active] FROM [spy_glossary_key];
+CREATE TEMPORARY TABLE [spy_glossary_key__temp__66864919d2695] AS SELECT [id_glossary_key],[key],[is_active] FROM [spy_glossary_key];
 DROP TABLE [spy_glossary_key];
 
 CREATE TABLE [spy_glossary_key]
@@ -136,10 +119,10 @@ CREATE INDEX [spy_glossary_key-index-key] ON [spy_glossary_key] ([key]);
 
 CREATE INDEX [spy_glossary_key-is_active] ON [spy_glossary_key] ([is_active]);
 
-INSERT INTO [spy_glossary_key] (id_glossary_key, key, is_active) SELECT id_glossary_key, key, is_active FROM [spy_glossary_key__temp__668260dcbf84c];
-DROP TABLE [spy_glossary_key__temp__668260dcbf84c];
+INSERT INTO [spy_glossary_key] (id_glossary_key, key, is_active) SELECT id_glossary_key, key, is_active FROM [spy_glossary_key__temp__66864919d2695];
+DROP TABLE [spy_glossary_key__temp__66864919d2695];
 
-CREATE TEMPORARY TABLE [spy_glossary_storage__temp__668260dcbf8a4] AS SELECT [id_glossary_storage],[fk_glossary_key],[glossary_key],[locale],[data],[key],[alias_keys],[created_at],[updated_at] FROM [spy_glossary_storage];
+CREATE TEMPORARY TABLE [spy_glossary_storage__temp__66864919d26e8] AS SELECT [id_glossary_storage],[fk_glossary_key],[glossary_key],[locale],[data],[key],[alias_keys],[created_at],[updated_at] FROM [spy_glossary_storage];
 DROP TABLE [spy_glossary_storage];
 
 CREATE TABLE [spy_glossary_storage]
@@ -159,10 +142,10 @@ CREATE TABLE [spy_glossary_storage]
 
 CREATE INDEX [spy_glossary_storage-fk_glossary_key] ON [spy_glossary_storage] ([fk_glossary_key]);
 
-INSERT INTO [spy_glossary_storage] (id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at) SELECT id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at FROM [spy_glossary_storage__temp__668260dcbf8a4];
-DROP TABLE [spy_glossary_storage__temp__668260dcbf8a4];
+INSERT INTO [spy_glossary_storage] (id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at) SELECT id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at FROM [spy_glossary_storage__temp__66864919d26e8];
+DROP TABLE [spy_glossary_storage__temp__66864919d26e8];
 
-CREATE TEMPORARY TABLE [spy_glossary_translation__temp__668260dcbf918] AS SELECT [id_glossary_translation],[fk_glossary_key],[fk_locale],[value],[is_active] FROM [spy_glossary_translation];
+CREATE TEMPORARY TABLE [spy_glossary_translation__temp__66864919d275f] AS SELECT [id_glossary_translation],[fk_glossary_key],[fk_locale],[value],[is_active] FROM [spy_glossary_translation];
 DROP TABLE [spy_glossary_translation];
 
 CREATE TABLE [spy_glossary_translation]
@@ -184,10 +167,10 @@ CREATE INDEX [spy_glossary_translation-index-fk_locale] ON [spy_glossary_transla
 
 CREATE INDEX [spy_glossary_translation-is_active] ON [spy_glossary_translation] ([is_active]);
 
-INSERT INTO [spy_glossary_translation] (id_glossary_translation, fk_glossary_key, fk_locale, value, is_active) SELECT id_glossary_translation, fk_glossary_key, fk_locale, value, is_active FROM [spy_glossary_translation__temp__668260dcbf918];
-DROP TABLE [spy_glossary_translation__temp__668260dcbf918];
+INSERT INTO [spy_glossary_translation] (id_glossary_translation, fk_glossary_key, fk_locale, value, is_active) SELECT id_glossary_translation, fk_glossary_key, fk_locale, value, is_active FROM [spy_glossary_translation__temp__66864919d275f];
+DROP TABLE [spy_glossary_translation__temp__66864919d275f];
 
-CREATE TEMPORARY TABLE [spy_locale__temp__668260dcbf984] AS SELECT [id_locale],[locale_name],[is_active] FROM [spy_locale];
+CREATE TEMPORARY TABLE [spy_locale__temp__66864919d27c9] AS SELECT [id_locale],[locale_name],[is_active] FROM [spy_locale];
 DROP TABLE [spy_locale];
 
 CREATE TABLE [spy_locale]
@@ -201,10 +184,10 @@ CREATE TABLE [spy_locale]
 
 CREATE INDEX [spy_locale-index-locale_name] ON [spy_locale] ([locale_name]);
 
-INSERT INTO [spy_locale] (id_locale, locale_name, is_active) SELECT id_locale, locale_name, is_active FROM [spy_locale__temp__668260dcbf984];
-DROP TABLE [spy_locale__temp__668260dcbf984];
+INSERT INTO [spy_locale] (id_locale, locale_name, is_active) SELECT id_locale, locale_name, is_active FROM [spy_locale__temp__66864919d27c9];
+DROP TABLE [spy_locale__temp__66864919d27c9];
 
-CREATE TEMPORARY TABLE [spy_locale_store__temp__668260dcbf9c4] AS SELECT [id_locale_store],[fk_locale],[fk_store] FROM [spy_locale_store];
+CREATE TEMPORARY TABLE [spy_locale_store__temp__66864919d2809] AS SELECT [id_locale_store],[fk_locale],[fk_store] FROM [spy_locale_store];
 DROP TABLE [spy_locale_store];
 
 CREATE TABLE [spy_locale_store]
@@ -222,10 +205,10 @@ CREATE INDEX [index-spy_locale_store-fk_locale] ON [spy_locale_store] ([fk_local
 
 CREATE INDEX [index-spy_locale_store-fk_store] ON [spy_locale_store] ([fk_store]);
 
-INSERT INTO [spy_locale_store] (id_locale_store, fk_locale, fk_store) SELECT id_locale_store, fk_locale, fk_store FROM [spy_locale_store__temp__668260dcbf9c4];
-DROP TABLE [spy_locale_store__temp__668260dcbf9c4];
+INSERT INTO [spy_locale_store] (id_locale_store, fk_locale, fk_store) SELECT id_locale_store, fk_locale, fk_store FROM [spy_locale_store__temp__66864919d2809];
+DROP TABLE [spy_locale_store__temp__66864919d2809];
 
-CREATE TEMPORARY TABLE [spy_merchant__temp__668260dcbfa21] AS SELECT [id_merchant],[merchant_reference],[tenant_identifier],[config],[created_at],[updated_at] FROM [spy_merchant];
+CREATE TEMPORARY TABLE [spy_merchant__temp__66864919d2865] AS SELECT [id_merchant],[merchant_reference],[tenant_identifier],[config],[created_at],[updated_at] FROM [spy_merchant];
 DROP TABLE [spy_merchant];
 
 CREATE TABLE [spy_merchant]
@@ -240,10 +223,10 @@ CREATE TABLE [spy_merchant]
     UNIQUE ([id_merchant])
 );
 
-INSERT INTO [spy_merchant] (id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at) SELECT id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at FROM [spy_merchant__temp__668260dcbfa21];
-DROP TABLE [spy_merchant__temp__668260dcbfa21];
+INSERT INTO [spy_merchant] (id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at) SELECT id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at FROM [spy_merchant__temp__66864919d2865];
+DROP TABLE [spy_merchant__temp__66864919d2865];
 
-CREATE TEMPORARY TABLE [spy_payment__temp__668260dcbfa80] AS SELECT [id_payment],[order_reference],[transaction_id],[tenant_identifier],[quote],[status],[redirect_success_url],[redirect_cancel_url],[created_at],[updated_at] FROM [spy_payment];
+CREATE TEMPORARY TABLE [spy_payment__temp__66864919d28c4] AS SELECT [id_payment],[order_reference],[quote],[redirect_cancel_url],[redirect_success_url],[status],[tenant_identifier],[transaction_id],[created_at],[updated_at] FROM [spy_payment];
 DROP TABLE [spy_payment];
 
 CREATE TABLE [spy_payment]
@@ -263,10 +246,10 @@ CREATE TABLE [spy_payment]
     UNIQUE ([id_payment])
 );
 
-INSERT INTO [spy_payment] (id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at) SELECT id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at FROM [spy_payment__temp__668260dcbfa80];
-DROP TABLE [spy_payment__temp__668260dcbfa80];
+INSERT INTO [spy_payment] (id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at) SELECT id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at FROM [spy_payment__temp__66864919d28c4];
+DROP TABLE [spy_payment__temp__66864919d28c4];
 
-CREATE TEMPORARY TABLE [spy_payment_refund__temp__668260dcbfaf9] AS SELECT [id_payment_refund],[transaction_id],[refund_id],[status],[amount],[currency_code],[order_item_ids],[created_at],[updated_at] FROM [spy_payment_refund];
+CREATE TEMPORARY TABLE [spy_payment_refund__temp__66864919d2940] AS SELECT [id_payment_refund],[amount],[currency_code],[order_item_ids],[refund_id],[status],[transaction_id],[created_at],[updated_at] FROM [spy_payment_refund];
 DROP TABLE [spy_payment_refund];
 
 CREATE TABLE [spy_payment_refund]
@@ -287,10 +270,33 @@ CREATE TABLE [spy_payment_refund]
 
 CREATE INDEX [spy_payment_refund-search_index] ON [spy_payment_refund] ([transaction_id],[status],[order_item_ids]);
 
-INSERT INTO [spy_payment_refund] (id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at) SELECT id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at FROM [spy_payment_refund__temp__668260dcbfaf9];
-DROP TABLE [spy_payment_refund__temp__668260dcbfaf9];
+INSERT INTO [spy_payment_refund] (id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at) SELECT id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at FROM [spy_payment_refund__temp__66864919d2940];
+DROP TABLE [spy_payment_refund__temp__66864919d2940];
 
-CREATE TEMPORARY TABLE [spy_queue_process__temp__668260dcbfb76] AS SELECT [id_queue_process],[server_id],[process_pid],[worker_pid],[queue_name],[created_at],[updated_at] FROM [spy_queue_process];
+CREATE TEMPORARY TABLE [spy_payment_transfer__temp__66864919d29c4] AS SELECT [id_payment_transfer],[amount],[commission],[item_references],[merchant_reference],[order_reference],[tenant_identifier],[transaction_id],[transfer_id],[created_at],[updated_at] FROM [spy_payment_transfer];
+DROP TABLE [spy_payment_transfer];
+
+CREATE TABLE [spy_payment_transfer]
+(
+    [id_payment_transfer] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    [amount] INTEGER,
+    [commission] INTEGER,
+    [item_references] MEDIUMTEXT,
+    [merchant_reference] CHAR(36),
+    [order_reference] CHAR(36),
+    [tenant_identifier] CHAR(60),
+    [transaction_id] CHAR(36),
+    [transfer_id] CHAR(36),
+    [created_at] TIMESTAMP,
+    [updated_at] TIMESTAMP,
+    UNIQUE ([tenant_identifier],[transaction_id],[transfer_id],[merchant_reference]),
+    UNIQUE ([id_payment_transfer])
+);
+
+INSERT INTO [spy_payment_transfer] (id_payment_transfer, amount, commission, item_references, merchant_reference, order_reference, tenant_identifier, transaction_id, transfer_id, created_at, updated_at) SELECT id_payment_transfer, amount, commission, item_references, merchant_reference, order_reference, tenant_identifier, transaction_id, transfer_id, created_at, updated_at FROM [spy_payment_transfer__temp__66864919d29c4];
+DROP TABLE [spy_payment_transfer__temp__66864919d29c4];
+
+CREATE TEMPORARY TABLE [spy_queue_process__temp__66864919d2a41] AS SELECT [id_queue_process],[server_id],[process_pid],[worker_pid],[queue_name],[created_at],[updated_at] FROM [spy_queue_process];
 DROP TABLE [spy_queue_process];
 
 CREATE TABLE [spy_queue_process]
@@ -308,10 +314,10 @@ CREATE TABLE [spy_queue_process]
 
 CREATE INDEX [spy_queue_process-index-key] ON [spy_queue_process] ([server_id],[queue_name]);
 
-INSERT INTO [spy_queue_process] (id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at) SELECT id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at FROM [spy_queue_process__temp__668260dcbfb76];
-DROP TABLE [spy_queue_process__temp__668260dcbfb76];
+INSERT INTO [spy_queue_process] (id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at) SELECT id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at FROM [spy_queue_process__temp__66864919d2a41];
+DROP TABLE [spy_queue_process__temp__66864919d2a41];
 
-CREATE TEMPORARY TABLE [spy_store__temp__668260dcbfbd6] AS SELECT [id_store],[fk_currency],[fk_locale],[name] FROM [spy_store];
+CREATE TEMPORARY TABLE [spy_store__temp__66864919d2a9f] AS SELECT [id_store],[fk_currency],[fk_locale],[name] FROM [spy_store];
 DROP TABLE [spy_store];
 
 CREATE TABLE [spy_store]
@@ -329,10 +335,10 @@ CREATE INDEX [index-spy_store-fk_currency] ON [spy_store] ([fk_currency]);
 
 CREATE INDEX [index-spy_store-fk_locale] ON [spy_store] ([fk_locale]);
 
-INSERT INTO [spy_store] (id_store, fk_currency, fk_locale, name) SELECT id_store, fk_currency, fk_locale, name FROM [spy_store__temp__668260dcbfbd6];
-DROP TABLE [spy_store__temp__668260dcbfbd6];
+INSERT INTO [spy_store] (id_store, fk_currency, fk_locale, name) SELECT id_store, fk_currency, fk_locale, name FROM [spy_store__temp__66864919d2a9f];
+DROP TABLE [spy_store__temp__66864919d2a9f];
 
-CREATE TEMPORARY TABLE [spy_touch__temp__668260dcbfc34] AS SELECT [id_touch],[item_type],[item_event],[item_id],[touched] FROM [spy_touch];
+CREATE TEMPORARY TABLE [spy_touch__temp__66864919d2afb] AS SELECT [id_touch],[item_type],[item_event],[item_id],[touched] FROM [spy_touch];
 DROP TABLE [spy_touch];
 
 CREATE TABLE [spy_touch]
@@ -350,10 +356,10 @@ CREATE INDEX [spy_touch-index-item_id] ON [spy_touch] ([item_id]);
 
 CREATE INDEX [index_spy_touch-item_event_item_type_touched] ON [spy_touch] ([item_event],[item_type],[touched]);
 
-INSERT INTO [spy_touch] (id_touch, item_type, item_event, item_id, touched) SELECT id_touch, item_type, item_event, item_id, touched FROM [spy_touch__temp__668260dcbfc34];
-DROP TABLE [spy_touch__temp__668260dcbfc34];
+INSERT INTO [spy_touch] (id_touch, item_type, item_event, item_id, touched) SELECT id_touch, item_type, item_event, item_id, touched FROM [spy_touch__temp__66864919d2afb];
+DROP TABLE [spy_touch__temp__66864919d2afb];
 
-CREATE TEMPORARY TABLE [spy_touch_search__temp__668260dcbfc8e] AS SELECT [id_touch_search],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_search];
+CREATE TEMPORARY TABLE [spy_touch_search__temp__66864919d2b51] AS SELECT [id_touch_search],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_search];
 DROP TABLE [spy_touch_search];
 
 CREATE TABLE [spy_touch_search]
@@ -372,10 +378,10 @@ CREATE TABLE [spy_touch_search]
 
 CREATE INDEX [spy_touch_search-index-key] ON [spy_touch_search] ([key]);
 
-INSERT INTO [spy_touch_search] (id_touch_search, fk_locale, fk_store, fk_touch, key) SELECT id_touch_search, fk_locale, fk_store, fk_touch, key FROM [spy_touch_search__temp__668260dcbfc8e];
-DROP TABLE [spy_touch_search__temp__668260dcbfc8e];
+INSERT INTO [spy_touch_search] (id_touch_search, fk_locale, fk_store, fk_touch, key) SELECT id_touch_search, fk_locale, fk_store, fk_touch, key FROM [spy_touch_search__temp__66864919d2b51];
+DROP TABLE [spy_touch_search__temp__66864919d2b51];
 
-CREATE TEMPORARY TABLE [spy_touch_storage__temp__668260dcbfcff] AS SELECT [id_touch_storage],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_storage];
+CREATE TEMPORARY TABLE [spy_touch_storage__temp__66864919d2bbb] AS SELECT [id_touch_storage],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_storage];
 DROP TABLE [spy_touch_storage];
 
 CREATE TABLE [spy_touch_storage]
@@ -394,8 +400,8 @@ CREATE TABLE [spy_touch_storage]
 
 CREATE INDEX [spy_touch_storage-index-key] ON [spy_touch_storage] ([key]);
 
-INSERT INTO [spy_touch_storage] (id_touch_storage, fk_locale, fk_store, fk_touch, key) SELECT id_touch_storage, fk_locale, fk_store, fk_touch, key FROM [spy_touch_storage__temp__668260dcbfcff];
-DROP TABLE [spy_touch_storage__temp__668260dcbfcff];
+INSERT INTO [spy_touch_storage] (id_touch_storage, fk_locale, fk_store, fk_touch, key) SELECT id_touch_storage, fk_locale, fk_store, fk_touch, key FROM [spy_touch_storage__temp__66864919d2bbb];
+DROP TABLE [spy_touch_storage__temp__66864919d2bbb];
 
 PRAGMA foreign_keys = ON;
 EOT;
@@ -417,9 +423,7 @@ EOT;
 
 PRAGMA foreign_keys = OFF;
 
-DROP TABLE IF EXISTS [spy_payment_transfer];
-
-CREATE TEMPORARY TABLE [spy_app_config__temp__668260dcbfe34] AS SELECT [id_app_config],[tenant_identifier],[is_active],[config],[status],[created_at],[updated_at] FROM [spy_app_config];
+CREATE TEMPORARY TABLE [spy_app_config__temp__66864919d2cd3] AS SELECT [id_app_config],[tenant_identifier],[is_active],[config],[status],[created_at],[updated_at] FROM [spy_app_config];
 DROP TABLE [spy_app_config];
 
 CREATE TABLE [spy_app_config]
@@ -435,10 +439,10 @@ CREATE TABLE [spy_app_config]
     UNIQUE ([id_app_config])
 );
 
-INSERT INTO [spy_app_config] (id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at) SELECT id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at FROM [spy_app_config__temp__668260dcbfe34];
-DROP TABLE [spy_app_config__temp__668260dcbfe34];
+INSERT INTO [spy_app_config] (id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at) SELECT id_app_config, tenant_identifier, is_active, config, status, created_at, updated_at FROM [spy_app_config__temp__66864919d2cd3];
+DROP TABLE [spy_app_config__temp__66864919d2cd3];
 
-CREATE TEMPORARY TABLE [spy_currency_store__temp__668260dcbfe9c] AS SELECT [id_currency_store],[fk_currency],[fk_store] FROM [spy_currency_store];
+CREATE TEMPORARY TABLE [spy_currency_store__temp__66864919d2d34] AS SELECT [id_currency_store],[fk_currency],[fk_store] FROM [spy_currency_store];
 DROP TABLE [spy_currency_store];
 
 CREATE TABLE [spy_currency_store]
@@ -456,10 +460,10 @@ CREATE INDEX [index-spy_currency_store-fk_store] ON [spy_currency_store] ([fk_st
 
 CREATE INDEX [index-spy_currency_store-fk_currency] ON [spy_currency_store] ([fk_currency]);
 
-INSERT INTO [spy_currency_store] (id_currency_store, fk_currency, fk_store) SELECT id_currency_store, fk_currency, fk_store FROM [spy_currency_store__temp__668260dcbfe9c];
-DROP TABLE [spy_currency_store__temp__668260dcbfe9c];
+INSERT INTO [spy_currency_store] (id_currency_store, fk_currency, fk_store) SELECT id_currency_store, fk_currency, fk_store FROM [spy_currency_store__temp__66864919d2d34];
+DROP TABLE [spy_currency_store__temp__66864919d2d34];
 
-CREATE TEMPORARY TABLE [spy_glossary_key__temp__668260dcbfef6] AS SELECT [id_glossary_key],[key],[is_active] FROM [spy_glossary_key];
+CREATE TEMPORARY TABLE [spy_glossary_key__temp__66864919d2d8a] AS SELECT [id_glossary_key],[key],[is_active] FROM [spy_glossary_key];
 DROP TABLE [spy_glossary_key];
 
 CREATE TABLE [spy_glossary_key]
@@ -475,10 +479,10 @@ CREATE INDEX [spy_glossary_key-is_active] ON [spy_glossary_key] ([is_active]);
 
 CREATE INDEX [spy_glossary_key-index-key] ON [spy_glossary_key] ([key]);
 
-INSERT INTO [spy_glossary_key] (id_glossary_key, key, is_active) SELECT id_glossary_key, key, is_active FROM [spy_glossary_key__temp__668260dcbfef6];
-DROP TABLE [spy_glossary_key__temp__668260dcbfef6];
+INSERT INTO [spy_glossary_key] (id_glossary_key, key, is_active) SELECT id_glossary_key, key, is_active FROM [spy_glossary_key__temp__66864919d2d8a];
+DROP TABLE [spy_glossary_key__temp__66864919d2d8a];
 
-CREATE TEMPORARY TABLE [spy_glossary_storage__temp__668260dcbff4a] AS SELECT [id_glossary_storage],[fk_glossary_key],[glossary_key],[locale],[data],[key],[alias_keys],[created_at],[updated_at] FROM [spy_glossary_storage];
+CREATE TEMPORARY TABLE [spy_glossary_storage__temp__66864919d2ddb] AS SELECT [id_glossary_storage],[fk_glossary_key],[glossary_key],[locale],[data],[key],[alias_keys],[created_at],[updated_at] FROM [spy_glossary_storage];
 DROP TABLE [spy_glossary_storage];
 
 CREATE TABLE [spy_glossary_storage]
@@ -498,10 +502,10 @@ CREATE TABLE [spy_glossary_storage]
 
 CREATE INDEX [spy_glossary_storage-fk_glossary_key] ON [spy_glossary_storage] ([fk_glossary_key]);
 
-INSERT INTO [spy_glossary_storage] (id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at) SELECT id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at FROM [spy_glossary_storage__temp__668260dcbff4a];
-DROP TABLE [spy_glossary_storage__temp__668260dcbff4a];
+INSERT INTO [spy_glossary_storage] (id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at) SELECT id_glossary_storage, fk_glossary_key, glossary_key, locale, data, key, alias_keys, created_at, updated_at FROM [spy_glossary_storage__temp__66864919d2ddb];
+DROP TABLE [spy_glossary_storage__temp__66864919d2ddb];
 
-CREATE TEMPORARY TABLE [spy_glossary_translation__temp__668260dcbffbc] AS SELECT [id_glossary_translation],[fk_glossary_key],[fk_locale],[value],[is_active] FROM [spy_glossary_translation];
+CREATE TEMPORARY TABLE [spy_glossary_translation__temp__66864919d2e4a] AS SELECT [id_glossary_translation],[fk_glossary_key],[fk_locale],[value],[is_active] FROM [spy_glossary_translation];
 DROP TABLE [spy_glossary_translation];
 
 CREATE TABLE [spy_glossary_translation]
@@ -523,10 +527,10 @@ CREATE INDEX [spy_glossary_translation-is_active] ON [spy_glossary_translation] 
 
 CREATE INDEX [spy_glossary_translation-index-fk_locale] ON [spy_glossary_translation] ([fk_locale]);
 
-INSERT INTO [spy_glossary_translation] (id_glossary_translation, fk_glossary_key, fk_locale, value, is_active) SELECT id_glossary_translation, fk_glossary_key, fk_locale, value, is_active FROM [spy_glossary_translation__temp__668260dcbffbc];
-DROP TABLE [spy_glossary_translation__temp__668260dcbffbc];
+INSERT INTO [spy_glossary_translation] (id_glossary_translation, fk_glossary_key, fk_locale, value, is_active) SELECT id_glossary_translation, fk_glossary_key, fk_locale, value, is_active FROM [spy_glossary_translation__temp__66864919d2e4a];
+DROP TABLE [spy_glossary_translation__temp__66864919d2e4a];
 
-CREATE TEMPORARY TABLE [spy_locale__temp__668260dcc0027] AS SELECT [id_locale],[locale_name],[is_active] FROM [spy_locale];
+CREATE TEMPORARY TABLE [spy_locale__temp__66864919d2eaf] AS SELECT [id_locale],[locale_name],[is_active] FROM [spy_locale];
 DROP TABLE [spy_locale];
 
 CREATE TABLE [spy_locale]
@@ -540,10 +544,10 @@ CREATE TABLE [spy_locale]
 
 CREATE INDEX [spy_locale-index-locale_name] ON [spy_locale] ([locale_name]);
 
-INSERT INTO [spy_locale] (id_locale, locale_name, is_active) SELECT id_locale, locale_name, is_active FROM [spy_locale__temp__668260dcc0027];
-DROP TABLE [spy_locale__temp__668260dcc0027];
+INSERT INTO [spy_locale] (id_locale, locale_name, is_active) SELECT id_locale, locale_name, is_active FROM [spy_locale__temp__66864919d2eaf];
+DROP TABLE [spy_locale__temp__66864919d2eaf];
 
-CREATE TEMPORARY TABLE [spy_locale_store__temp__668260dcc0069] AS SELECT [id_locale_store],[fk_locale],[fk_store] FROM [spy_locale_store];
+CREATE TEMPORARY TABLE [spy_locale_store__temp__66864919d2eed] AS SELECT [id_locale_store],[fk_locale],[fk_store] FROM [spy_locale_store];
 DROP TABLE [spy_locale_store];
 
 CREATE TABLE [spy_locale_store]
@@ -561,10 +565,10 @@ CREATE INDEX [index-spy_locale_store-fk_store] ON [spy_locale_store] ([fk_store]
 
 CREATE INDEX [index-spy_locale_store-fk_locale] ON [spy_locale_store] ([fk_locale]);
 
-INSERT INTO [spy_locale_store] (id_locale_store, fk_locale, fk_store) SELECT id_locale_store, fk_locale, fk_store FROM [spy_locale_store__temp__668260dcc0069];
-DROP TABLE [spy_locale_store__temp__668260dcc0069];
+INSERT INTO [spy_locale_store] (id_locale_store, fk_locale, fk_store) SELECT id_locale_store, fk_locale, fk_store FROM [spy_locale_store__temp__66864919d2eed];
+DROP TABLE [spy_locale_store__temp__66864919d2eed];
 
-CREATE TEMPORARY TABLE [spy_merchant__temp__668260dcc00c5] AS SELECT [id_merchant],[merchant_reference],[tenant_identifier],[config],[created_at],[updated_at] FROM [spy_merchant];
+CREATE TEMPORARY TABLE [spy_merchant__temp__66864919d2f44] AS SELECT [id_merchant],[merchant_reference],[tenant_identifier],[config],[created_at],[updated_at] FROM [spy_merchant];
 DROP TABLE [spy_merchant];
 
 CREATE TABLE [spy_merchant]
@@ -579,22 +583,22 @@ CREATE TABLE [spy_merchant]
     UNIQUE ([id_merchant])
 );
 
-INSERT INTO [spy_merchant] (id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at) SELECT id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at FROM [spy_merchant__temp__668260dcc00c5];
-DROP TABLE [spy_merchant__temp__668260dcc00c5];
+INSERT INTO [spy_merchant] (id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at) SELECT id_merchant, merchant_reference, tenant_identifier, config, created_at, updated_at FROM [spy_merchant__temp__66864919d2f44];
+DROP TABLE [spy_merchant__temp__66864919d2f44];
 
-CREATE TEMPORARY TABLE [spy_payment__temp__668260dcc0124] AS SELECT [id_payment],[order_reference],[quote],[redirect_cancel_url],[redirect_success_url],[status],[tenant_identifier],[transaction_id],[created_at],[updated_at] FROM [spy_payment];
+CREATE TEMPORARY TABLE [spy_payment__temp__66864919d2f9e] AS SELECT [id_payment],[order_reference],[quote],[redirect_cancel_url],[redirect_success_url],[status],[tenant_identifier],[transaction_id],[created_at],[updated_at] FROM [spy_payment];
 DROP TABLE [spy_payment];
 
 CREATE TABLE [spy_payment]
 (
     [id_payment] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     [order_reference] CHAR(36),
-    [transaction_id] CHAR(36),
-    [tenant_identifier] CHAR(60),
     [quote] MEDIUMTEXT,
-    [status] CHAR(64),
-    [redirect_success_url] MEDIUMTEXT,
     [redirect_cancel_url] MEDIUMTEXT,
+    [redirect_success_url] MEDIUMTEXT,
+    [status] CHAR(64),
+    [tenant_identifier] CHAR(60),
+    [transaction_id] CHAR(36),
     [created_at] TIMESTAMP,
     [updated_at] TIMESTAMP,
     UNIQUE ([transaction_id]),
@@ -602,21 +606,21 @@ CREATE TABLE [spy_payment]
     UNIQUE ([id_payment])
 );
 
-INSERT INTO [spy_payment] (id_payment, order_reference, transaction_id, tenant_identifier, quote, status, redirect_success_url, redirect_cancel_url, created_at, updated_at) SELECT id_payment, order_reference, transaction_id, tenant_identifier, quote, status, redirect_success_url, redirect_cancel_url, created_at, updated_at FROM [spy_payment__temp__668260dcc0124];
-DROP TABLE [spy_payment__temp__668260dcc0124];
+INSERT INTO [spy_payment] (id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at) SELECT id_payment, order_reference, quote, redirect_cancel_url, redirect_success_url, status, tenant_identifier, transaction_id, created_at, updated_at FROM [spy_payment__temp__66864919d2f9e];
+DROP TABLE [spy_payment__temp__66864919d2f9e];
 
-CREATE TEMPORARY TABLE [spy_payment_refund__temp__668260dcc01a1] AS SELECT [id_payment_refund],[amount],[currency_code],[order_item_ids],[refund_id],[status],[transaction_id],[created_at],[updated_at] FROM [spy_payment_refund];
+CREATE TEMPORARY TABLE [spy_payment_refund__temp__66864919d3015] AS SELECT [id_payment_refund],[amount],[currency_code],[order_item_ids],[refund_id],[status],[transaction_id],[created_at],[updated_at] FROM [spy_payment_refund];
 DROP TABLE [spy_payment_refund];
 
 CREATE TABLE [spy_payment_refund]
 (
     [id_payment_refund] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    [transaction_id] CHAR(36),
-    [refund_id] CHAR(36),
-    [status] VARCHAR(255) NOT NULL,
     [amount] INTEGER NOT NULL,
     [currency_code] VARCHAR(10) NOT NULL,
     [order_item_ids] MEDIUMTEXT,
+    [refund_id] CHAR(36),
+    [status] VARCHAR(255) NOT NULL,
+    [transaction_id] CHAR(36),
     [created_at] TIMESTAMP,
     [updated_at] TIMESTAMP,
     UNIQUE ([id_payment_refund]),
@@ -626,10 +630,33 @@ CREATE TABLE [spy_payment_refund]
 
 CREATE INDEX [spy_payment_refund-search_index] ON [spy_payment_refund] ([transaction_id],[status],[order_item_ids]);
 
-INSERT INTO [spy_payment_refund] (id_payment_refund, transaction_id, refund_id, status, amount, currency_code, order_item_ids, created_at, updated_at) SELECT id_payment_refund, transaction_id, refund_id, status, amount, currency_code, order_item_ids, created_at, updated_at FROM [spy_payment_refund__temp__668260dcc01a1];
-DROP TABLE [spy_payment_refund__temp__668260dcc01a1];
+INSERT INTO [spy_payment_refund] (id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at) SELECT id_payment_refund, amount, currency_code, order_item_ids, refund_id, status, transaction_id, created_at, updated_at FROM [spy_payment_refund__temp__66864919d3015];
+DROP TABLE [spy_payment_refund__temp__66864919d3015];
 
-CREATE TEMPORARY TABLE [spy_queue_process__temp__668260dcc0222] AS SELECT [id_queue_process],[server_id],[process_pid],[worker_pid],[queue_name],[created_at],[updated_at] FROM [spy_queue_process];
+CREATE TEMPORARY TABLE [spy_payment_transfer__temp__66864919d3097] AS SELECT [id_payment_transfer],[amount],[commission],[item_references],[merchant_reference],[order_reference],[tenant_identifier],[transaction_id],[transfer_id],[created_at],[updated_at] FROM [spy_payment_transfer];
+DROP TABLE [spy_payment_transfer];
+
+CREATE TABLE [spy_payment_transfer]
+(
+    [id_payment_transfer] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    [amount] INTEGER,
+    [commission] INTEGER,
+    [item_references] MEDIUMTEXT,
+    [merchant_reference] CHAR(36),
+    [order_reference] CHAR(36),
+    [tenant_identifier] CHAR(60),
+    [transaction_id] CHAR(36),
+    [transfer_id] CHAR(36),
+    [created_at] TIMESTAMP,
+    [updated_at] TIMESTAMP,
+    UNIQUE ([tenant_identifier],[transaction_id],[transfer_id],[merchant_reference]),
+    UNIQUE ([id_payment_transfer])
+);
+
+INSERT INTO [spy_payment_transfer] (id_payment_transfer, amount, commission, item_references, merchant_reference, order_reference, tenant_identifier, transaction_id, transfer_id, created_at, updated_at) SELECT id_payment_transfer, amount, commission, item_references, merchant_reference, order_reference, tenant_identifier, transaction_id, transfer_id, created_at, updated_at FROM [spy_payment_transfer__temp__66864919d3097];
+DROP TABLE [spy_payment_transfer__temp__66864919d3097];
+
+CREATE TEMPORARY TABLE [spy_queue_process__temp__66864919d3113] AS SELECT [id_queue_process],[server_id],[process_pid],[worker_pid],[queue_name],[created_at],[updated_at] FROM [spy_queue_process];
 DROP TABLE [spy_queue_process];
 
 CREATE TABLE [spy_queue_process]
@@ -647,10 +674,10 @@ CREATE TABLE [spy_queue_process]
 
 CREATE INDEX [spy_queue_process-index-key] ON [spy_queue_process] ([server_id],[queue_name]);
 
-INSERT INTO [spy_queue_process] (id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at) SELECT id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at FROM [spy_queue_process__temp__668260dcc0222];
-DROP TABLE [spy_queue_process__temp__668260dcc0222];
+INSERT INTO [spy_queue_process] (id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at) SELECT id_queue_process, server_id, process_pid, worker_pid, queue_name, created_at, updated_at FROM [spy_queue_process__temp__66864919d3113];
+DROP TABLE [spy_queue_process__temp__66864919d3113];
 
-CREATE TEMPORARY TABLE [spy_store__temp__668260dcc0286] AS SELECT [id_store],[fk_currency],[fk_locale],[name] FROM [spy_store];
+CREATE TEMPORARY TABLE [spy_store__temp__66864919d3172] AS SELECT [id_store],[fk_currency],[fk_locale],[name] FROM [spy_store];
 DROP TABLE [spy_store];
 
 CREATE TABLE [spy_store]
@@ -668,10 +695,10 @@ CREATE INDEX [index-spy_store-fk_locale] ON [spy_store] ([fk_locale]);
 
 CREATE INDEX [index-spy_store-fk_currency] ON [spy_store] ([fk_currency]);
 
-INSERT INTO [spy_store] (id_store, fk_currency, fk_locale, name) SELECT id_store, fk_currency, fk_locale, name FROM [spy_store__temp__668260dcc0286];
-DROP TABLE [spy_store__temp__668260dcc0286];
+INSERT INTO [spy_store] (id_store, fk_currency, fk_locale, name) SELECT id_store, fk_currency, fk_locale, name FROM [spy_store__temp__66864919d3172];
+DROP TABLE [spy_store__temp__66864919d3172];
 
-CREATE TEMPORARY TABLE [spy_touch__temp__668260dcc02e7] AS SELECT [id_touch],[item_type],[item_event],[item_id],[touched] FROM [spy_touch];
+CREATE TEMPORARY TABLE [spy_touch__temp__66864919d31ce] AS SELECT [id_touch],[item_type],[item_event],[item_id],[touched] FROM [spy_touch];
 DROP TABLE [spy_touch];
 
 CREATE TABLE [spy_touch]
@@ -689,10 +716,10 @@ CREATE INDEX [index_spy_touch-item_event_item_type_touched] ON [spy_touch] ([ite
 
 CREATE INDEX [spy_touch-index-item_id] ON [spy_touch] ([item_id]);
 
-INSERT INTO [spy_touch] (id_touch, item_type, item_event, item_id, touched) SELECT id_touch, item_type, item_event, item_id, touched FROM [spy_touch__temp__668260dcc02e7];
-DROP TABLE [spy_touch__temp__668260dcc02e7];
+INSERT INTO [spy_touch] (id_touch, item_type, item_event, item_id, touched) SELECT id_touch, item_type, item_event, item_id, touched FROM [spy_touch__temp__66864919d31ce];
+DROP TABLE [spy_touch__temp__66864919d31ce];
 
-CREATE TEMPORARY TABLE [spy_touch_search__temp__668260dcc0340] AS SELECT [id_touch_search],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_search];
+CREATE TEMPORARY TABLE [spy_touch_search__temp__66864919d3226] AS SELECT [id_touch_search],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_search];
 DROP TABLE [spy_touch_search];
 
 CREATE TABLE [spy_touch_search]
@@ -711,10 +738,10 @@ CREATE TABLE [spy_touch_search]
 
 CREATE INDEX [spy_touch_search-index-key] ON [spy_touch_search] ([key]);
 
-INSERT INTO [spy_touch_search] (id_touch_search, fk_locale, fk_store, fk_touch, key) SELECT id_touch_search, fk_locale, fk_store, fk_touch, key FROM [spy_touch_search__temp__668260dcc0340];
-DROP TABLE [spy_touch_search__temp__668260dcc0340];
+INSERT INTO [spy_touch_search] (id_touch_search, fk_locale, fk_store, fk_touch, key) SELECT id_touch_search, fk_locale, fk_store, fk_touch, key FROM [spy_touch_search__temp__66864919d3226];
+DROP TABLE [spy_touch_search__temp__66864919d3226];
 
-CREATE TEMPORARY TABLE [spy_touch_storage__temp__668260dcc03ad] AS SELECT [id_touch_storage],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_storage];
+CREATE TEMPORARY TABLE [spy_touch_storage__temp__66864919d3293] AS SELECT [id_touch_storage],[fk_locale],[fk_store],[fk_touch],[key] FROM [spy_touch_storage];
 DROP TABLE [spy_touch_storage];
 
 CREATE TABLE [spy_touch_storage]
@@ -733,8 +760,8 @@ CREATE TABLE [spy_touch_storage]
 
 CREATE INDEX [spy_touch_storage-index-key] ON [spy_touch_storage] ([key]);
 
-INSERT INTO [spy_touch_storage] (id_touch_storage, fk_locale, fk_store, fk_touch, key) SELECT id_touch_storage, fk_locale, fk_store, fk_touch, key FROM [spy_touch_storage__temp__668260dcc03ad];
-DROP TABLE [spy_touch_storage__temp__668260dcc03ad];
+INSERT INTO [spy_touch_storage] (id_touch_storage, fk_locale, fk_store, fk_touch, key) SELECT id_touch_storage, fk_locale, fk_store, fk_touch, key FROM [spy_touch_storage__temp__66864919d3293];
+DROP TABLE [spy_touch_storage__temp__66864919d3293];
 
 PRAGMA foreign_keys = ON;
 EOT;

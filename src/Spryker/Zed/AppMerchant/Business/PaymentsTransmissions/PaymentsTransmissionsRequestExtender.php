@@ -11,7 +11,6 @@ use ArrayObject;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
-use Spryker\Zed\AppMerchant\Business\Exception\MerchantNotFoundException;
 use Spryker\Zed\AppMerchant\Business\Message\MessageBuilder;
 use Spryker\Zed\AppMerchant\Persistence\AppMerchantRepositoryInterface;
 
@@ -83,6 +82,20 @@ class PaymentsTransmissionsRequestExtender
 
         foreach ($orderItemsWithMerchants as $orderItemWithMerchant) {
             foreach ($orderItemWithMerchant as $merchantReference => $merchantData) {
+                $merchantTransfer = $this->findMerchantForOrderItem($merchantTransfers, $merchantReference);
+
+                if (!$merchantTransfer instanceof MerchantTransfer) {
+                    $paymentTransmissionTransfer = $merchantData['paymentTransmission'];
+                    $paymentTransmissionTransfer
+                        ->setOrderItems(new ArrayObject($merchantData['orderItems']))
+                        ->setIsSuccessful(false)
+                        ->setMessage(MessageBuilder::merchantByReferenceNotFound($merchantReference));
+
+                    $paymentsTransmissionsRequestTransfer->addFailedPaymentTransmission($paymentTransmissionTransfer);
+
+                    continue;
+                }
+
                 $paymentTransmissionTransfer = $merchantData['paymentTransmission'];
                 $paymentTransmissionTransfer
                     ->setOrderItems(new ArrayObject($merchantData['orderItems']))
@@ -98,10 +111,8 @@ class PaymentsTransmissionsRequestExtender
 
     /**
      * @param array<\Generated\Shared\Transfer\MerchantTransfer> $merchantTransfers
-     *
-     * @throws \Pyz\Zed\AppMerchantPayment\Business\Exception\MerchantNotFoundException
      */
-    protected function findMerchantForOrderItem(array $merchantTransfers, string $merchantReference): MerchantTransfer
+    protected function findMerchantForOrderItem(array $merchantTransfers, string $merchantReference): ?MerchantTransfer
     {
         foreach ($merchantTransfers as $merchantTransfer) {
             if ($merchantReference === $merchantTransfer->getMerchantReferenceOrFail()) {
@@ -109,6 +120,6 @@ class PaymentsTransmissionsRequestExtender
             }
         }
 
-        throw new MerchantNotFoundException(MessageBuilder::merchantByReferenceNotFound($merchantReference));
+        return null;
     }
 }

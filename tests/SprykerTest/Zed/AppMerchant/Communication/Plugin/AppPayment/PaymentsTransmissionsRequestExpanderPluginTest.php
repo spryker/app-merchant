@@ -16,7 +16,6 @@ use Generated\Shared\Transfer\PaymentTransmissionTransfer;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentQuery;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentTransferQuery;
 use Ramsey\Uuid\Uuid;
-use Spryker\Zed\AppMerchant\Business\Exception\MerchantNotFoundException;
 use Spryker\Zed\AppMerchant\Business\Message\MessageBuilder;
 use Spryker\Zed\AppMerchant\Communication\Plugin\AppPayment\MerchantsPaymentsTransmissionsRequestExtenderPlugin;
 use SprykerTest\Shared\Testify\Helper\DataCleanupHelperTrait;
@@ -144,12 +143,16 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
             ->setTenantIdentifier($tenantIdentifier)
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
-        // Expectation
-        $this->expectException(MerchantNotFoundException::class);
-        $this->expectExceptionMessage(MessageBuilder::merchantByReferenceNotFound('non-existing-merchant-reference'));
-
         // Act
         $paymentsTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
-        $paymentsTransmissionRequestExtenderPlugin->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+        $paymentsTransmissionsResponseTransfer = $paymentsTransmissionRequestExtenderPlugin->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+
+        $this->assertCount(1, $paymentsTransmissionsResponseTransfer->getFailedPaymentsTransmissions());
+
+        /** @var \Generated\Shared\Transfer\PaymentTransmissionTransfer $paymentTransmissionTransfer */
+        $paymentTransmissionTransfer = $paymentsTransmissionsResponseTransfer->getFailedPaymentsTransmissions()[0];
+
+        $this->assertFalse($paymentTransmissionTransfer->getIsSuccessful());
+        $this->assertSame(MessageBuilder::merchantByReferenceNotFound('non-existing-merchant-reference'), $paymentTransmissionTransfer->getMessage());
     }
 }
