@@ -15,8 +15,6 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class AppMerchantConfig extends AbstractBundleConfig
 {
     /**
-     * @api
-     *
      * @var string
      */
     public const MERCHANT_ONBOARDING_STATUS = 'merchant-onboarding-status';
@@ -31,12 +29,9 @@ class AppMerchantConfig extends AbstractBundleConfig
         return $this->getStringValue(AppKernelConstants::APP_IDENTIFIER);
     }
 
-    // TODO can we move this to another place?
-    // It should be provided by the "using" module.
-
     public function getOnboardingType(): string
     {
-        return 'payment';
+        return 'implement on project level';
     }
 
     protected function getStringValue(string $configKey): string
