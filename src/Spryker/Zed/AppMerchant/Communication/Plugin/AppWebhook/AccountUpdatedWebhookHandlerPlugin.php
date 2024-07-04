@@ -13,10 +13,6 @@ use Spryker\Zed\AppWebhook\Dependency\Plugin\WebhookHandlerPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * {@inheritDoc}
- *
- * @api
- *
  * @method \Spryker\Zed\AppMerchant\AppMerchantConfig getConfig()
  * @method \Spryker\Zed\AppMerchant\Business\AppMerchantFacadeInterface getFacade()
  */
