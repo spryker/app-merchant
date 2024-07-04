@@ -98,7 +98,7 @@ $config[PropelConstants::PROPEL] = [
     ],
 ];
 
-$config[PropelConstants::ZED_DB_ENGINE] = 'sqlite';
+$config[PropelConstants::ZED_DB_ENGINE] = 'mysql';
 $config[PropelConstants::ZED_DB_HOST] = 'localhost';
 $config[PropelConstants::ZED_DB_PORT] = 1234;
 $config[PropelConstants::ZED_DB_USERNAME] = 'catface';

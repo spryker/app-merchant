@@ -15,6 +15,8 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class AppMerchantConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const MERCHANT_ONBOARDING_STATUS = 'merchant-onboarding-status';
