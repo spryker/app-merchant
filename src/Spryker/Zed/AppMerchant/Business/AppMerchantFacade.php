@@ -18,16 +18,17 @@ use Generated\Shared\Transfer\WebhookResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * {@inheritDoc}
- *
- * @api
- *
  * @method \Spryker\Zed\AppMerchant\Business\AppMerchantBusinessFactory getFactory()
  * @method \Spryker\Zed\AppMerchant\Persistence\AppMerchantRepositoryInterface getRepository()
  * @method \Spryker\Zed\AppMerchant\Persistence\AppMerchantEntityManagerInterface getEntityManager()
  */
 class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInterface
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function informTenantAboutMerchantAppOnboardingReadiness(AppConfigTransfer $appConfigTransfer): AppConfigTransfer
     {
         return $this->getFactory()

@@ -1,4 +1,4 @@
-# AppMerchant Module
+# AppMerchant Package
 [![Latest Stable Version](https://poser.pugx.org/spryker/app-merchant/v/stable.svg)](https://packagist.org/packages/spryker/app-merchant)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
 
@@ -37,35 +37,22 @@ vendor/bin/codecept build
 vendor/bin/codecept run
 ```
 
-## Plugins
+### Configure the MessageBroker
 
-The following plugins can be used inside your Payment Service Provider App.
+Add the following to your project:
 
-### GlueApplication
+```
+$config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] =
+$config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
+    ReadyForMerchantAppOnboardingTransfer::class => 'merchant-app-events',
+    MerchantAppOnboardingStatusChangedTransfer::class => 'merchant-app-events',
+];
 
-#### \Spryker\Glue\AppMerchantBackendApi\Plugin\GlueApplication\AppMerchantBackendApiRouteProviderPlugin
+$config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] = [
+    'merchant-app-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+];
 
-This plugin provides the routes for the AppMerchantBackendApi module.
-
-
-###### Routes provided
-
-- /private/initialize-payment - Used from the Tenant side to initialize a payment.
-
-
-### AppKernel
-- \Spryker\Glue\AppMerchantBackendApi\Plugin\AppKernel\PaymentConfigurationValidatorPlugin
-- \Spryker\Zed\AppMerchant\Communication\Plugin\AppKernel\DeleteTenantPaymentsConfigurationAfterDeletePlugin
-- \Spryker\Zed\AppMerchant\Communication\Plugin\AppKernel\SendAddPaymentMethodMessageConfigurationAfterSavePlugin
-- \Spryker\Zed\AppMerchant\Communication\Plugin\AppKernel\SendDeletePaymentMethodMessageConfigurationAfterDeletePlugin
-
-### AppWebhook
-- \Spryker\Zed\AppMerchant\Communication\Plugin\AppWebhook\PaymentWebhookHandlerPlugin
-
-### MessageBroker
-- \Spryker\Zed\AppMerchant\Communication\Plugin\MessageBroker\CancelPaymentMessageHandlerPlugin
-- \Spryker\Zed\AppMerchant\Communication\Plugin\MessageBroker\CapturePaymentMessageHandlerPlugin
-- \Spryker\Zed\AppMerchant\Communication\Plugin\MessageBroker\RefundPaymentMessageHandlerPlugin
-
-### MessageBrokerAws
-- \Spryker\Zed\AppMerchant\Communication\Plugin\MessageBrokerAws\ConsumerIdHttpChannelMessageReceiverRequestExpanderPlugin
+$config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
+    'merchant-app-events' => MessageBrokerAwsConfig::HTTP_TRANSPORT,
+];
+```

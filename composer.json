@@ -5,16 +5,18 @@
     "license": "proprietary",
     "require": {
         "php": ">=8.1",
+<<<<<<< HEAD
         "spryker/app-payment": "dev-feature/acp-2626/master-stripe-marketplace-payment-flow-marketplace-oms-workflow-transfers-to-merchants",
         "spryker/app-webhook": "dev-main",
+=======
+        "spryker/app-payment": "dev-feature/app-payment-extraction",
+        "spryker/app-webhook": "dev-feature/extracted-app-webhook as dev-main",
+>>>>>>> 390e7c4adb39a78167b4625af65783e385d291c2
         "spryker/glue-application-extension": "^1.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/log": "^3.0.0",
         "spryker/message-broker": "^1.11.0",
-        "spryker/propel-encryption-behavior": "^0.1.1",
-        "spryker/transfer": "^3.33.0",
-        "spryker/util-encoding": "^2.0.0",
-        "spryker/util-text": "^1.0.0"
+        "spryker/transfer": "^3.33.0"
     },
     "require-dev": {
         "codeception/codeception": "^5.0",
