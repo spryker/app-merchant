@@ -38,7 +38,10 @@ class AppMerchantConfig extends AbstractBundleConfig
 
     protected function getStringValue(string $configKey): string
     {
-        /** @phpstan-var string */
+        /**
+         * @api
+ *
+    * @phpstan-var string */
         return $this->get($configKey);
     }
 }
