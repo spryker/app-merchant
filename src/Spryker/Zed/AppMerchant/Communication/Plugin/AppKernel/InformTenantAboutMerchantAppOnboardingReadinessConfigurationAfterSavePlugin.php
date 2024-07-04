@@ -12,6 +12,10 @@ use Spryker\Zed\AppKernelExtension\Dependency\Plugin\ConfigurationAfterSavePlugi
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
+ * {@inheritDoc}
+ *
+ * @api
+ *
  * @method \Spryker\Zed\AppMerchant\Business\AppMerchantFacadeInterface getFacade()
  * @method \Spryker\Zed\AppMerchant\AppMerchantConfig getConfig()
  */

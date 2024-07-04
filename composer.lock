@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "66d65eb6507d3ab477e39e7af05cfe64",
-=======
-    "content-hash": "03cb3e75632287a46b318e90e7a1c04c",
->>>>>>> 390e7c4adb39a78167b4625af65783e385d291c2
+    "content-hash": "d6602658e7635b8cc1b9cbd5f2e14d9c",
     "packages": [
         {
             "name": "brick/math",
@@ -1654,11 +1650,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:spryker/app-payment.git",
-<<<<<<< HEAD
                 "reference": "eb12217a1a0028e64f5f45b3480d00cd4d84be5b"
-=======
-                "reference": "aed8af42511ef115fba5a56b2099a9e80977fa6e"
->>>>>>> 390e7c4adb39a78167b4625af65783e385d291c2
             },
             "require": {
                 "php": ">=8.1",
@@ -1776,11 +1768,7 @@
                 "proprietary"
             ],
             "description": "AppPayment module",
-<<<<<<< HEAD
             "time": "2024-07-04T06:49:29+00:00"
-=======
-            "time": "2024-06-27T11:08:36+00:00"
->>>>>>> 390e7c4adb39a78167b4625af65783e385d291c2
         },
         {
             "name": "spryker/app-webhook",
