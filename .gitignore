@@ -23,6 +23,7 @@ GTAGS
 /config/Shared/console_env_local.php
 
 src/Generated/
+src/Orm/Zed/
 /vendor/
 
 # logs
