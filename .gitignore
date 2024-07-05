@@ -51,3 +51,4 @@ tests/_data/app_payment_db
 
 # tools
 .phpstorm.meta.php
+composer.lock
