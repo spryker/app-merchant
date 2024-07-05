@@ -31,9 +31,4 @@ class AppMerchantToAppKernelFacadeBridge implements AppMerchantToAppKernelFacade
     {
         return $this->appKernelFacade->getConfig($appConfigCriteriaTransfer, $transfer);
     }
-
-    public function saveConfig(AppConfigTransfer $appConfigTransfer): AppConfigResponseTransfer
-    {
-        return $this->appKernelFacade->saveConfig($appConfigTransfer);
-    }
 }
