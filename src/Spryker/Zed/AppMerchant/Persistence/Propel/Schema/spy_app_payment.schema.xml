@@ -2,7 +2,7 @@
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\AppPayment\Persistence" package="src.Orm.Zed.AppPayment.Persistence">
 
     <table name="spy_payment_transfer" idMethod="native" class="SpyPayment">
-        <column name="merchant_reference" type="CHAR" size="36" required="false" description="Has to be false for order items that do not have a merchant"/>
+        <column name="merchant_reference" type="CHAR" size="36" required="false" description="The field must be required=false for order items that do not have a merchant"/>
         <unique name="spy_payment_transfer-unique-transfer">
             <unique-column name="tenant_identifier"/>
             <unique-column name="transaction_id"/>

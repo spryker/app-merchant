@@ -62,13 +62,7 @@
             "Generated\\": "src/Generated/",
             "Orm\\": "src/Orm/"
         }
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:spryker/app-payment.git"
-        }
-    ],
+    }
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
