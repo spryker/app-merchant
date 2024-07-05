@@ -37,7 +37,6 @@ suites:
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
                 - \SprykerTest\Zed\AppMerchant\Helper\MerchantAppOnboardingCrudHelper
 
-
     Communication:
         path: Communication
         actor: AppMerchantCommunicationTester
