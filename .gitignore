@@ -34,6 +34,8 @@ src/Orm/Zed/
 /tests/_support/_generated/*
 !/tests/_support/_generated/.gitkeep
 
+tests/_data/app_merchant_db
+
 /tests/SprykerTest/*/*/_output/*
 /tests/SprykerTest/*/*/_support/_generated/*
 
