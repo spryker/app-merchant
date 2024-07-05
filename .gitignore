@@ -23,6 +23,7 @@ GTAGS
 /config/Shared/console_env_local.php
 
 src/Generated/
+src/Orm/Zed/
 /vendor/
 
 # logs
@@ -32,6 +33,8 @@ src/Generated/
 !/tests/_output/.gitkeep
 /tests/_support/_generated/*
 !/tests/_support/_generated/.gitkeep
+
+tests/_data/app_merchant_db
 
 /tests/SprykerTest/*/*/_output/*
 /tests/SprykerTest/*/*/_support/_generated/*
@@ -51,3 +54,4 @@ tests/_data/app_payment_db
 
 # tools
 .phpstorm.meta.php
+composer.lock
