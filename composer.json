@@ -62,7 +62,7 @@
             "Generated\\": "src/Generated/",
             "Orm\\": "src/Orm/"
         }
-    }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
