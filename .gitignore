@@ -46,7 +46,7 @@ tests/_data/app_merchant_db
 # propel config
 /src/Orm/Propel/Schema
 /src/Orm/Propel/Sql
-/src/Orm/Propel/generated-conf/
+/data/cache/propel/generated-conf/
 
 # propel migrations
 /src/Orm/Propel/Migration_SQLite/
