@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+    version: 1.0.0
+    contact:
+        name: Spryker
+        url: 'https://spryker.com/'
+        email: support@spryker.com
+    title: 'Spryker Merchant (aware) App API'
+    license:
+        name: Proprietary
+
+paths:
+    '/private/merchants/onboarding':
+        post:
+            x-spryker:
+                module: AppMerchantBackendApi
+                controller: MerchantAppOnboardingResourceController
+            summary: 'Endpoint which will be used by Spryker Shop to onboard a Merchant to the App which is Merchant aware. This endpoint will be sent to Spryker Shop as a part of the onboarding process for this App and will be used in case of this App provides the onboarding strategy "API".'
+            parameters:
+                - $ref: '#/components/parameters/tenantIdentifier'
+                - $ref: '#/components/parameters/merchantReference'
+            requestBody:
+                description: 'Provides Tenant and Merchant data which is used to onboard a Merchant to this App.'
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MerchantAppOnboardingRequest'
+            responses:
+                200:
+                    description: 'Response when the entity was already created before.'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MerchantAppOnboardingResponse'
+                201:
+                    description: 'Response when the entity is created on the App side.'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MerchantAppOnboardingResponse'
+                400:
+                    description: 'Bad request.'
+                412:
+                    description: 'Precondition Failed. Used when there is a configuration error on the platform implementation. The Merchant data is still persisted and after a fix of the precondition the already created entities will be used.'
+                default:
+                    description: 'Expected response to a bad request.'
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+
+components:
+    schemas:
+        MerchantAppOnboardingRequest:
+            type: object
+            description: 'All URLs are optional and only some of them are used. Which ones depends on the implementation.'
+            properties:
+                    merchant:
+                        type: object
+                    successUrl:
+                        type: string
+                        description: 'Provides success URL where the merchant user will be redirected to when the process completed successfully.'
+                        example: 'https://example.com/merchant/onboarding/success'
+                    refreshUrl:
+                        type: string
+                        description: 'Provides a refresh URL where the merchant user will be redirected to when he requests a refresh of the page.'
+                        example: 'https://example.com/merchant/onboarding/success'
+                    cancelUrl:
+                        type: string
+                        description: 'Provides cancel URL where the merchant user will be redirected to in case of a process cancellation.'
+                        example: 'https://example.com/merchant/onboarding/cancel'
+                    errorUrl:
+                        type: string
+                        description: 'Provides error URL where the merchant user will be redirected to in case of an error.'
+                        example: 'https://example.com/merchant/onboarding/error'
+
+        MerchantAppOnboardingResponse:
+            type: object
+            properties:
+                strategy:
+                    type: string
+                    description: 'Provides the strategy to be used on SCOS side to continue.'
+                    example:
+                        - 'redirect'
+                        - 'content'
+                url:
+                    type: string
+                    description: 'In case the strategy is redirect, this field value will be used to redirect the merchant user.'
+                    example: 'https://example.com/merchant/onboarding'
+                content:
+                    type: string
+                    description: 'In case the strategy is content, this field value will be used as content shown to the merchant user.'
+                    example: 'Onboarding completed successfully.'
+
+    parameters:
+        tenantIdentifier:
+            name: X-Tenant-Identifier
+            in: header
+            required: true
+            description: 'Reference of the Tenant.'
+            schema:
+                type: string
+            example: eab952ee-ff9b-4db3-ae5b-943dc8ab32fb
+
+        merchantReference:
+            name: X-Merchant-Reference
+            in: header
+            required: true
+            description: 'Reference of the Merchant.'
+            schema:
+                type: string
+            example: MER0000001

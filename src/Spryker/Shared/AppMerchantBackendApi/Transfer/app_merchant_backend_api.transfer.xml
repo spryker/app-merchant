@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<transfers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+    <transfer name="MerchantAppOnboardingRequest" strict="true">
+        <property name="tenantIdentifier" type="string"/>
+        <property name="appConfig" type="AppConfig"/>
+        <property name="merchant" type="Merchant" description="Loaded Merchant which is used on the platform side."/>
+        <property name="merchant" type="Merchant"/>
+        <property name="successUrl" type="string"/>
+        <property name="refreshUrl" type="string"/>
+        <property name="cancelUrl" type="string"/>
+        <property name="errorUrl" type="string"/>
+    </transfer>
+
+    <transfer name="MerchantAppOnboardingResponse" strict="true">
+        <property name="isSuccessful" type="bool"/>
+        <property name="message" type="string" description="Message that gets passed from the Platform plugin in case of an error."/>
+        <property name="strategy" type="string"/>
+        <property name="url" type="string"/>
+        <property name="content" type="string"/>
+        <property name="merchant" type="Merchant" description="Possibly changed Merchant which will be persisted in the AppMerchant module"/>
+    </transfer>
+
+</transfers>

@@ -1,0 +1,39 @@
+namespace: SprykerTest\Glue\AppMerchantBackendApi
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output
+coverage:
+    enabled: true
+    remote: false
+    whitelist:
+        include:
+            - '../../../../src/Spryker/*/AppMerchant/*'
+            - '../../../../src/Spryker/*/AppMerchantBackendApi/*'
+suites:
+    RestApi:
+        actor: AppMerchantBackendApiTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Glue\AppMerchantBackendApi\Helper\MerchantAppOnboardingHelper
+                - \SprykerTest\Glue\AppMerchantBackendApi\Helper\WebhookApiHelper
+                - \SprykerTest\Shared\AppMerchant\Helper\AppMerchantHelper
+                - \SprykerTest\Shared\AppKernel\Helper\AppConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                -
+                    \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces:
+                            - Spryker
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Glue\Testify\Helper\DependencyProviderHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Glue\Testify\Helper\AppMerchantGlueBackendApiHelper
+                - \SprykerTest\Glue\Testify\Helper\JsonPath
+                - \SprykerTest\Zed\AppMerchant\Helper\MerchantAppOnboardingCrudHelper
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper

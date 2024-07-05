@@ -5,16 +5,13 @@
     "license": "proprietary",
     "require": {
         "php": ">=8.1",
-        "spryker/app-payment": "dev-feature/acp-2626/master-stripe-marketplace-payment-flow-marketplace-oms-workflow-transfers-to-merchants",
+        "spryker/app-payment": "dev-main",
         "spryker/app-webhook": "dev-main",
         "spryker/glue-application-extension": "^1.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/log": "^3.0.0",
         "spryker/message-broker": "^1.11.0",
-        "spryker/propel-encryption-behavior": "^0.1.1",
-        "spryker/transfer": "^3.33.0",
-        "spryker/util-encoding": "^2.0.0",
-        "spryker/util-text": "^1.0.0"
+        "spryker/transfer": "^3.33.0"
     },
     "require-dev": {
         "codeception/codeception": "^5.0",
@@ -31,8 +28,8 @@
         "phpstan/phpdoc-parser": "1.25.0",
         "phpstan/phpstan": "1.10.66",
         "rector/rector": "^0.19.0",
-        "spryker-sdk/async-api": "dev-feature/resolve-remote-references as 0.3.1",
-        "spryker/app-kernel": "dev-feature/extract-payment-template",
+        "spryker-sdk/async-api": "dev-master as 0.3.1",
+        "spryker/app-kernel": "dev-master",
         "spryker/code-sniffer": "*",
         "spryker/container": "*",
         "spryker/development": "^3.34.0",
@@ -66,12 +63,6 @@
             "Orm\\": "src/Orm/"
         }
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:spryker/app-payment.git"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
