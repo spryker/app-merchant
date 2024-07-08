@@ -13,7 +13,7 @@ use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\MerchantAppOnboarding
 use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\Writer\MerchantAppOnboardingCreator;
 use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\Writer\MerchantAppOnboardingCreatorInterface;
 use Spryker\Zed\AppMerchant\Business\Message\MessageSender;
-use Spryker\Zed\AppMerchant\Business\PaymentsTransmissions\PaymentsTransmissionsRequestExtender;
+use Spryker\Zed\AppMerchant\Business\PaymentTransmissions\PaymentTransmissionsRequestExtender;
 use Spryker\Zed\AppMerchant\Business\Webhook\WebhookHandler;
 use Spryker\Zed\AppMerchant\Business\Webhook\WebhookRequestExtender;
 use Spryker\Zed\AppMerchant\Dependency\Facade\AppMerchantToAppKernelFacadeInterface;
@@ -95,8 +95,8 @@ class AppMerchantBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    public function createPaymentsTransmissionsRequestExtender(): PaymentsTransmissionsRequestExtender
+    public function createPaymentTransmissionsRequestExtender(): PaymentTransmissionsRequestExtender
     {
-        return new PaymentsTransmissionsRequestExtender($this->getRepository());
+        return new PaymentTransmissionsRequestExtender($this->getRepository());
     }
 }
