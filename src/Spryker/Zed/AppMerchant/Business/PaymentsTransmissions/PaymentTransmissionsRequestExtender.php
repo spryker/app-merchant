@@ -10,26 +10,26 @@ namespace Spryker\Zed\AppMerchant\Business\PaymentsTransmissions;
 use ArrayObject;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
-use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Spryker\Zed\AppMerchant\Business\Message\MessageBuilder;
 use Spryker\Zed\AppMerchant\Persistence\AppMerchantRepositoryInterface;
 
-class PaymentsTransmissionsRequestExtender
+class PaymentTransmissionsRequestExtender
 {
     public function __construct(protected AppMerchantRepositoryInterface $appMerchantRepository)
     {
     }
 
     public function extendPaymentsTransmissionsRequest(
-        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
-    ): PaymentsTransmissionsRequestTransfer {
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer {
         $merchantReferences = [];
         $orderItemsWithMerchants = [];
 
-        $clonedPaymentsTransmissionsRequestTransfer = clone $paymentsTransmissionsRequestTransfer;
+        $clonedPaymentsTransmissionsRequestTransfer = clone $paymentTransmissionsRequestTransfer;
         $clonedPaymentsTransmissionsRequestTransfer->setPaymentsTransmissions(new ArrayObject());
 
-        foreach ($paymentsTransmissionsRequestTransfer->getPaymentsTransmissions() as $paymentsTransmission) {
+        foreach ($paymentTransmissionsRequestTransfer->getPaymentsTransmissions() as $paymentsTransmission) {
             foreach ($paymentsTransmission->getOrderItems() as $orderItemTransfer) {
                 if (!$orderItemTransfer->getMerchantReference()) {
                     continue;
@@ -51,7 +51,7 @@ class PaymentsTransmissionsRequestExtender
             }
         }
 
-        return $this->addPaymentsTransmissionsForOrderItemsWithMerchants(
+        return $this->addPaymentTransmissionsForOrderItemsWithMerchants(
             $clonedPaymentsTransmissionsRequestTransfer,
             $orderItemsWithMerchants,
             $merchantReferences,
@@ -64,19 +64,19 @@ class PaymentsTransmissionsRequestExtender
      * @param array<string, array<string, array{orderItems: array<\Generated\Shared\Transfer\OrderItemTransfer>, paymentTransmission: \Generated\Shared\Transfer\PaymentTransmissionTransfer}>> $orderItemsWithMerchants
      * @param array<string> $merchantReferences
      */
-    protected function addPaymentsTransmissionsForOrderItemsWithMerchants(
-        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer,
+    protected function addPaymentTransmissionsForOrderItemsWithMerchants(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer,
         array $orderItemsWithMerchants,
         array $merchantReferences
-    ): PaymentsTransmissionsRequestTransfer {
+    ): PaymentTransmissionsRequestTransfer {
         if ($orderItemsWithMerchants === []) {
-            return $paymentsTransmissionsRequestTransfer;
+            return $paymentTransmissionsRequestTransfer;
         }
 
         $merchantCriteriaTransfer = new MerchantCriteriaTransfer();
         $merchantCriteriaTransfer
             ->setMerchantReferences($merchantReferences)
-            ->setTenantIdentifier($paymentsTransmissionsRequestTransfer->getTenantIdentifierOrFail());
+            ->setTenantIdentifier($paymentTransmissionsRequestTransfer->getTenantIdentifierOrFail());
 
         $merchantTransfers = $this->appMerchantRepository->findMerchants($merchantCriteriaTransfer);
 
@@ -91,7 +91,7 @@ class PaymentsTransmissionsRequestExtender
                         ->setIsSuccessful(false)
                         ->setMessage(MessageBuilder::merchantByReferenceNotFound($merchantReference));
 
-                    $paymentsTransmissionsRequestTransfer->addFailedPaymentTransmission($paymentTransmissionTransfer);
+                    $paymentTransmissionsRequestTransfer->addFailedPaymentTransmission($paymentTransmissionTransfer);
 
                     continue;
                 }
@@ -102,11 +102,11 @@ class PaymentsTransmissionsRequestExtender
                     ->setMerchant($this->findMerchantForOrderItem($merchantTransfers, $merchantReference))
                     ->setMerchantReference($merchantReference);
 
-                $paymentsTransmissionsRequestTransfer->addPaymentTransmission($paymentTransmissionTransfer);
+                $paymentTransmissionsRequestTransfer->addPaymentTransmission($paymentTransmissionTransfer);
             }
         }
 
-        return $paymentsTransmissionsRequestTransfer;
+        return $paymentTransmissionsRequestTransfer;
     }
 
     /**

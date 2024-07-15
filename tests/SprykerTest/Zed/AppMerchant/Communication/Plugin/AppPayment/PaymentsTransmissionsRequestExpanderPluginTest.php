@@ -11,7 +11,7 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\OrderItemTransfer;
-use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionTransfer;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentQuery;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentTransferQuery;
@@ -62,22 +62,22 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
         $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
 
-        $paymentsTransmissionsRequestTransfer = new PaymentsTransmissionsRequestTransfer();
-        $paymentsTransmissionsRequestTransfer
+        $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
+        $paymentTransmissionsRequestTransfer
             ->setTenantIdentifier($tenantIdentifier)
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentsTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
-        $paymentsTransmissionsRequestTransfer = $paymentsTransmissionRequestExtenderPlugin->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionsRequestTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
         // Assert
-        $this->assertCount(2, $paymentsTransmissionsRequestTransfer->getPaymentsTransmissions());
+        $this->assertCount(2, $paymentTransmissionsRequestTransfer->getPaymentsTransmissions());
 
         // First PaymentTransmission has Merchant 1
         $this->tester->assertPaymentTransmissionEquals(
             /** @phpstan-var \Generated\Shared\Transfer\PaymentTransmissionTransfer */
-            $paymentsTransmissionsRequestTransfer->getPaymentsTransmissions()[0],
+            $paymentTransmissionsRequestTransfer->getPaymentsTransmissions()[0],
             [$orderItems[1], $orderItems[4]],
             $merchantTransfer1->getMerchantReference(),
         );
@@ -85,7 +85,7 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
         // Second PaymentTransmission has Merchant 2
         $this->tester->assertPaymentTransmissionEquals(
             /** @phpstan-var \Generated\Shared\Transfer\PaymentTransmissionTransfer */
-            $paymentsTransmissionsRequestTransfer->getPaymentsTransmissions()[1],
+            $paymentTransmissionsRequestTransfer->getPaymentsTransmissions()[1],
             [$orderItems[2], $orderItems[5]],
             $merchantTransfer2->getMerchantReference(),
         );
@@ -111,17 +111,17 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
         $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
 
-        $paymentsTransmissionsRequestTransfer = new PaymentsTransmissionsRequestTransfer();
-        $paymentsTransmissionsRequestTransfer
+        $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
+        $paymentTransmissionsRequestTransfer
             ->setTenantIdentifier($tenantIdentifier)
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentsTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
-        $paymentsTransmissionsRequestTransfer = $paymentsTransmissionRequestExtenderPlugin->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionsRequestTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
         // Assert
-        $this->assertCount(0, $paymentsTransmissionsRequestTransfer->getPaymentsTransmissions());
+        $this->assertCount(0, $paymentTransmissionsRequestTransfer->getPaymentsTransmissions());
     }
 
     public function testGivenOrderItemWithAMerchantReferenceThatDoesNotExistsWhenTheExtenderRunsThenAnExceptionIsThrown(): void
@@ -138,19 +138,19 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
         $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
 
-        $paymentsTransmissionsRequestTransfer = new PaymentsTransmissionsRequestTransfer();
-        $paymentsTransmissionsRequestTransfer
+        $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
+        $paymentTransmissionsRequestTransfer
             ->setTenantIdentifier($tenantIdentifier)
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentsTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
-        $paymentsTransmissionsResponseTransfer = $paymentsTransmissionRequestExtenderPlugin->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionsResponseTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
-        $this->assertCount(1, $paymentsTransmissionsResponseTransfer->getFailedPaymentsTransmissions());
+        $this->assertCount(1, $paymentTransmissionsResponseTransfer->getFailedPaymentTransmissions());
 
         /** @var \Generated\Shared\Transfer\PaymentTransmissionTransfer $paymentTransmissionTransfer */
-        $paymentTransmissionTransfer = $paymentsTransmissionsResponseTransfer->getFailedPaymentsTransmissions()[0];
+        $paymentTransmissionTransfer = $paymentTransmissionsResponseTransfer->getFailedPaymentTransmissions()[0];
 
         $this->assertFalse($paymentTransmissionTransfer->getIsSuccessful());
         $this->assertSame(MessageBuilder::merchantByReferenceNotFound('non-existing-merchant-reference'), $paymentTransmissionTransfer->getMessage());

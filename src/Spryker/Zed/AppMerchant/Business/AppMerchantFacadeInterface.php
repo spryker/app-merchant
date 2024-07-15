@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
-use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 
@@ -66,9 +66,9 @@ interface AppMerchantFacadeInterface
      *
      * @api
      */
-    public function extendPaymentsTransmissionsRequest(
-        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
-    ): PaymentsTransmissionsRequestTransfer;
+    public function extendPaymentTransmissionsRequest(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer;
 
     /**
      * Specification:

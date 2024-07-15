@@ -105,10 +105,10 @@
         <property name="errors" type="Error[]" singular="error"/>
     </transfer>
 
-    <transfer name="PaymentsTransmissionsRequest" strict="true">
+    <transfer name="PaymentTransmissionsRequest" strict="true">
         <property name="orderItems" type="OrderItem[]" singular="orderItem"/>
         <property name="paymentsTransmissions" type="PaymentTransmission[]" singular="paymentTransmission"/>
-        <property name="failedPaymentsTransmissions" type="PaymentTransmission[]" singular="failedPaymentTransmission"/>
+        <property name="failedPaymentTransmissions" type="PaymentTransmission[]" singular="failedPaymentTransmission"/>
     </transfer>
 
     <transfer name="OrderItem" strict="true">

@@ -7,8 +7,8 @@
 
 namespace Spryker\Zed\AppMerchant\Communication\Plugin\AppPayment;
 
-use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
-use Spryker\Zed\AppPayment\Dependency\Plugin\PaymentsTransmissionsRequestExtenderPluginInterface;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
+use Spryker\Zed\AppPayment\Dependency\Plugin\PaymentTransmissionsRequestExtenderPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
@@ -19,11 +19,11 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  * @method \Spryker\Zed\AppMerchant\Business\AppMerchantFacadeInterface getFacade()
  * @method \Spryker\Zed\AppMerchant\AppMerchantConfig getConfig()
  */
-class MerchantsPaymentsTransmissionsRequestExtenderPlugin extends AbstractPlugin implements PaymentsTransmissionsRequestExtenderPluginInterface
+class MerchantsPaymentsTransmissionsRequestExtenderPlugin extends AbstractPlugin implements PaymentTransmissionsRequestExtenderPluginInterface
 {
-    public function extendPaymentsTransmissionsRequest(
-        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
-    ): PaymentsTransmissionsRequestTransfer {
-        return $this->getFacade()->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+    public function extendPaymentTransmissionsRequest(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer {
+        return $this->getFacade()->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
     }
 }

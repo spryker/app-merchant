@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
-use Generated\Shared\Transfer\PaymentsTransmissionsRequestTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -62,10 +62,10 @@ class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInter
      *
      * @api
      */
-    public function extendPaymentsTransmissionsRequest(
-        PaymentsTransmissionsRequestTransfer $paymentsTransmissionsRequestTransfer
-    ): PaymentsTransmissionsRequestTransfer {
-        return $this->getFactory()->createPaymentsTransmissionsRequestExtender()->extendPaymentsTransmissionsRequest($paymentsTransmissionsRequestTransfer);
+    public function extendPaymentTransmissionsRequest(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer {
+        return $this->getFactory()->createPaymentTransmissionsRequestExtender()->extendPaymentsTransmissionsRequest($paymentTransmissionsRequestTransfer);
     }
 
     /**
