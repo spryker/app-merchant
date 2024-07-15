@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Zed\AppMerchant\Business\PaymentsTransmissions;
+namespace Spryker\Zed\AppMerchant\Business\PaymentTransmissions;
 
 use ArrayObject;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
