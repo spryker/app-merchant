@@ -55,6 +55,7 @@
 
     <transfer name="MerchantCriteria" strict="true">
         <property name="merchantReference" type="string"/>
+        <property name="merchantReferences" type="array"/>
         <property name="tenantIdentifier" type="string"/>
     </transfer>
 
@@ -102,6 +103,28 @@
      <transfer name="MerchantAppOnboarding" strict="true">
         <property name="status" type="string"/>
         <property name="errors" type="Error[]" singular="error"/>
+    </transfer>
+
+    <transfer name="PaymentTransmissionsRequest" strict="true">
+        <property name="orderItems" type="OrderItem[]" singular="orderItem"/>
+        <property name="paymentTransmissions" type="PaymentTransmission[]" singular="paymentTransmission"/>
+        <property name="failedPaymentTransmissions" type="PaymentTransmission[]" singular="failedPaymentTransmission"/>
+    </transfer>
+
+    <transfer name="OrderItem" strict="true">
+        <property name="orderReference" type="string"/>
+        <property name="merchantReference" type="string"/>
+    </transfer>
+
+    <transfer name="PaymentTransmission" strict="true">
+        <property name="merchant" type="Merchant"/>
+        <property name="merchantReference" type="string"/>
+        <property name="currency" type="Currency"/>
+        <property name="orderItems" type="OrderItem[]" singular="orderItem"/>
+    </transfer>
+
+    <transfer name="Currency">
+        <property name="code" type="string"/>
     </transfer>
 
 </transfers>

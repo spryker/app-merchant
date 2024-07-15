@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -54,6 +55,17 @@ class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInter
     public function handleWebhook(WebhookRequestTransfer $webhookRequestTransfer, WebhookResponseTransfer $webhookResponseTransfer): WebhookResponseTransfer
     {
         return $this->getFactory()->createWebhookHandler()->handleWebhook($webhookRequestTransfer, $webhookResponseTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
+    public function extendPaymentTransmissionsRequest(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer {
+        return $this->getFactory()->createPaymentTransmissionsRequestExtender()->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
     }
 
     /**

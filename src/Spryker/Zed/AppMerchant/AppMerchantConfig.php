@@ -15,11 +15,13 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class AppMerchantConfig extends AbstractBundleConfig
 {
     /**
+     * Keep this value as is it will be used by fromArray method for the AppMerchantConfig.
+     *
      * @api
      *
      * @var string
      */
-    public const MERCHANT_ONBOARDING_STATUS = 'merchant-onboarding-status';
+    public const MERCHANT_ONBOARDING_STATUS = 'merchantOnboardingStatus';
 
     public function getAppMerchantAppOnboardingApiUrl(): string
     {
@@ -33,12 +35,24 @@ class AppMerchantConfig extends AbstractBundleConfig
 
     public function getOnboardingType(): string
     {
-        return 'implement on project level';
+        return 'SET THIS ON PROJECT LEVEL';
     }
 
     protected function getStringValue(string $configKey): string
     {
         /** @phpstan-var string */
         return $this->get($configKey);
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getHandleableWebhookTypes(): array
+    {
+        return [
+            'account',
+        ];
     }
 }

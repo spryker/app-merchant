@@ -46,7 +46,7 @@ class AppMerchantFacadeTest extends Unit
         $merchantTransfer = $this->tester->getFacade()->findMerchant($merchantAppOnboardingRequestTransfer);
 
         // Assert
-        $this->tester->assertInstanceOf(MerchantTransfer::class, $merchantTransfer);
+        $this->assertInstanceOf(MerchantTransfer::class, $merchantTransfer);
     }
 
     /**

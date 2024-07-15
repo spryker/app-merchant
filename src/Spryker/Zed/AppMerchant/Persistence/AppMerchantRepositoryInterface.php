@@ -15,4 +15,11 @@ interface AppMerchantRepositoryInterface
     public function findMerchant(
         MerchantCriteriaTransfer $merchantCriteriaTransfer
     ): ?MerchantTransfer;
+
+    /**
+     * @return array<\Generated\Shared\Transfer\MerchantTransfer>
+     */
+    public function findMerchants(
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): array;
 }

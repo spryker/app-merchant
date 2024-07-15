@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
 
@@ -56,6 +57,18 @@ interface AppMerchantFacadeInterface
      * @api
      */
     public function handleWebhook(WebhookRequestTransfer $webhookRequestTransfer, WebhookResponseTransfer $webhookResponseTransfer): WebhookResponseTransfer;
+
+    /**
+     * Specification:
+     * - Filters all order items that do not have a merchantReference.
+     * - Groups order items by order reference and merchant reference.
+     * - Extends the `PaymentTransmissionsRequestTransfer` with the order items grouped by order reference and merchant reference.
+     *
+     * @api
+     */
+    public function extendPaymentTransmissionsRequest(
+        PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
+    ): PaymentTransmissionsRequestTransfer;
 
     /**
      * Specification:

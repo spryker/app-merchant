@@ -32,4 +32,27 @@ class AppMerchantRepository extends AbstractRepository implements AppMerchantRep
         return $this->getFactory()->createMerchantMapper()
             ->mapMerchantEntityToMerchantTransfer($merchantEntity, new MerchantTransfer());
     }
+
+    /**
+     * @return array<\Generated\Shared\Transfer\MerchantTransfer>
+     */
+    public function findMerchants(MerchantCriteriaTransfer $merchantCriteriaTransfer): array
+    {
+        $spyMerchantQuery = $this->getFactory()->createMerchantQuery();
+        $merchantEntityQuery = $spyMerchantQuery
+            ->filterByMerchantReference_In($merchantCriteriaTransfer->getMerchantReferencesOrFail())
+            ->filterByTenantIdentifier($merchantCriteriaTransfer->getTenantIdentifierOrFail());
+
+        $merchantEntityCollection = $merchantEntityQuery->find();
+
+        $merchantTransfers = [];
+
+        /** @var \Orm\Zed\AppMerchant\Persistence\SpyMerchant $merchantEntity */
+        foreach ($merchantEntityCollection as $merchantEntity) {
+            $merchantTransfers[] = $this->getFactory()->createMerchantMapper()
+                ->mapMerchantEntityToMerchantTransfer($merchantEntity, new MerchantTransfer());
+        }
+
+        return $merchantTransfers;
+    }
 }

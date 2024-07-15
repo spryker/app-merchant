@@ -36,3 +36,25 @@ suites:
                 - \SprykerTest\Zed\AppMerchant\Helper\AppMerchantHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
                 - \SprykerTest\Zed\AppMerchant\Helper\MerchantAppOnboardingCrudHelper
+
+    Communication:
+        path: Communication
+        actor: AppMerchantCommunicationTester
+        modules:
+            enabled:
+                - \SprykerTest\Shared\AppMerchant\Helper\AppMerchantHelper
+                - \SprykerTest\Shared\AppPayment\Helper\AppPaymentHelper
+                - \SprykerTest\Zed\AppKernel\Helper\AppKernelHelper
+                - \SprykerTest\Shared\AppKernel\Helper\AppConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                -
+                    \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces:
+                            - Spryker
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - Asserts
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
