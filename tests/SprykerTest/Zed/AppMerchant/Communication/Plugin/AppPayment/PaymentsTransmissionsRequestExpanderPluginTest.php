@@ -17,7 +17,7 @@ use Orm\Zed\AppPayment\Persistence\SpyPaymentQuery;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentTransferQuery;
 use Ramsey\Uuid\Uuid;
 use Spryker\Zed\AppMerchant\Business\Message\MessageBuilder;
-use Spryker\Zed\AppMerchant\Communication\Plugin\AppPayment\MerchantsPaymentsTransmissionsRequestExtenderPlugin;
+use Spryker\Zed\AppMerchant\Communication\Plugin\AppPayment\MerchantsPaymentTransmissionsRequestExtenderPlugin;
 use SprykerTest\Shared\Testify\Helper\DataCleanupHelperTrait;
 use SprykerTest\Zed\AppMerchant\AppMerchantCommunicationTester;
 
@@ -68,7 +68,7 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentTransmissionsRequestExtenderPlugin();
         $paymentTransmissionsRequestTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
         // Assert
@@ -117,7 +117,7 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentTransmissionsRequestExtenderPlugin();
         $paymentTransmissionsRequestTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
         // Assert
@@ -144,7 +144,7 @@ class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
             ->addPaymentTransmission($paymentTransmissionTransfer);
 
         // Act
-        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentsTransmissionsRequestExtenderPlugin();
+        $paymentTransmissionRequestExtenderPlugin = new MerchantsPaymentTransmissionsRequestExtenderPlugin();
         $paymentTransmissionsResponseTransfer = $paymentTransmissionRequestExtenderPlugin->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
 
         $this->assertCount(1, $paymentTransmissionsResponseTransfer->getFailedPaymentTransmissions());

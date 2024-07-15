@@ -19,7 +19,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  * @method \Spryker\Zed\AppMerchant\Business\AppMerchantFacadeInterface getFacade()
  * @method \Spryker\Zed\AppMerchant\AppMerchantConfig getConfig()
  */
-class MerchantsPaymentsTransmissionsRequestExtenderPlugin extends AbstractPlugin implements PaymentTransmissionsRequestExtenderPluginInterface
+class MerchantsPaymentTransmissionsRequestExtenderPlugin extends AbstractPlugin implements PaymentTransmissionsRequestExtenderPluginInterface
 {
     public function extendPaymentTransmissionsRequest(
         PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
