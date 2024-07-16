@@ -20,17 +20,17 @@ class PaymentTransmissionsRequestExtender
     {
     }
 
-    public function extendPaymentsTransmissionsRequest(
+    public function extendPaymentTransmissionsRequest(
         PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
     ): PaymentTransmissionsRequestTransfer {
         $merchantReferences = [];
         $orderItemsWithMerchants = [];
 
-        $clonedPaymentsTransmissionsRequestTransfer = clone $paymentTransmissionsRequestTransfer;
-        $clonedPaymentsTransmissionsRequestTransfer->setPaymentsTransmissions(new ArrayObject());
+        $clonedPaymentTransmissionsRequestTransfer = clone $paymentTransmissionsRequestTransfer;
+        $clonedPaymentTransmissionsRequestTransfer->setPaymentTransmissions(new ArrayObject());
 
-        foreach ($paymentTransmissionsRequestTransfer->getPaymentsTransmissions() as $paymentsTransmission) {
-            foreach ($paymentsTransmission->getOrderItems() as $orderItemTransfer) {
+        foreach ($paymentTransmissionsRequestTransfer->getPaymentTransmissions() as $paymentTransmission) {
+            foreach ($paymentTransmission->getOrderItems() as $orderItemTransfer) {
                 if (!$orderItemTransfer->getMerchantReference()) {
                     continue;
                 }
@@ -42,7 +42,7 @@ class PaymentTransmissionsRequestExtender
                 if (!isset($orderItemsWithMerchants[$orderItemTransfer->getOrderReference()][$orderItemTransfer->getMerchantReference()])) {
                     $orderItemsWithMerchants[$orderItemTransfer->getOrderReference()][$orderItemTransfer->getMerchantReference()] = [
                         'orderItems' => [],
-                        'paymentTransmission' => clone $paymentsTransmission,
+                        'paymentTransmission' => clone $paymentTransmission,
                     ];
                 }
 
@@ -52,7 +52,7 @@ class PaymentTransmissionsRequestExtender
         }
 
         return $this->addPaymentTransmissionsForOrderItemsWithMerchants(
-            $clonedPaymentsTransmissionsRequestTransfer,
+            $clonedPaymentTransmissionsRequestTransfer,
             $orderItemsWithMerchants,
             $merchantReferences,
         );

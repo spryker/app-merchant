@@ -65,7 +65,7 @@ class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInter
     public function extendPaymentTransmissionsRequest(
         PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
     ): PaymentTransmissionsRequestTransfer {
-        return $this->getFactory()->createPaymentTransmissionsRequestExtender()->extendPaymentsTransmissionsRequest($paymentTransmissionsRequestTransfer);
+        return $this->getFactory()->createPaymentTransmissionsRequestExtender()->extendPaymentTransmissionsRequest($paymentTransmissionsRequestTransfer);
     }
 
     /**

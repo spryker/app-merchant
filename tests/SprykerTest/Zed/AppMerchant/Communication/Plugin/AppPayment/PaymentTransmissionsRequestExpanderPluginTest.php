@@ -30,10 +30,10 @@ use SprykerTest\Zed\AppMerchant\AppMerchantCommunicationTester;
  * @group Communication
  * @group Plugin
  * @group AppPayment
- * @group PaymentsTransmissionsRequestExpanderPluginTest
+ * @group PaymentTransmissionsRequestExpanderPluginTest
  * Add your own group annotations below this line
  */
-class PaymentsTransmissionsRequestExpanderPluginTest extends Unit
+class PaymentTransmissionsRequestExpanderPluginTest extends Unit
 {
     use DataCleanupHelperTrait;
 

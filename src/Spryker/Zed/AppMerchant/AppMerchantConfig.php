@@ -15,11 +15,13 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class AppMerchantConfig extends AbstractBundleConfig
 {
     /**
+     * Keep this value as is it will be used by fromArray method for the AppMerchantConfig.
+     *
      * @api
      *
      * @var string
      */
-    public const MERCHANT_ONBOARDING_STATUS = 'merchant-onboarding-status';
+    public const MERCHANT_ONBOARDING_STATUS = 'merchantOnboardingStatus';
 
     public function getAppMerchantAppOnboardingApiUrl(): string
     {

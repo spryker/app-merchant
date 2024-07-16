@@ -62,7 +62,7 @@ interface AppMerchantFacadeInterface
      * Specification:
      * - Filters all order items that do not have a merchantReference.
      * - Groups order items by order reference and merchant reference.
-     * - Extends the `PaymentsTransmissionsRequestTransfer` with the order items grouped by order reference and merchant reference.
+     * - Extends the `PaymentTransmissionsRequestTransfer` with the order items grouped by order reference and merchant reference.
      *
      * @api
      */
