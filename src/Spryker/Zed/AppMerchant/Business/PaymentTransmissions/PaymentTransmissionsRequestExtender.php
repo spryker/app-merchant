@@ -49,10 +49,14 @@ class PaymentTransmissionsRequestExtender
     }
 
     /**
-     * First array key is the order reference, second array key is the merchant reference.
+     * @param \Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
      *
-     * @param array<string, array<string, array{paymentTransmissionItems: array<\Generated\Shared\Transfer\OrderItemTransfer>, paymentTransmission: \Generated\Shared\Transfer\PaymentTransmissionTransfer}>> $paymentTransmissionItemsGroupedByOrderReferenceAndMerchant
+     * First array key is the order reference, second array key is the merchant reference.
+     * @param array<string, array<string, array<string, list<\Generated\Shared\Transfer\OrderItemTransfer>|\Generated\Shared\Transfer\OrderItemTransfer>>> $paymentTransmissionItemsGroupedByOrderReferenceAndMerchant
+     *
      * @param array<string> $merchantReferences
+     *
+     * @return \Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer
      */
     protected function addPaymentTransmissionsForPaymentTransmissionItemsWithMerchants(
         PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer,
