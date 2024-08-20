@@ -17,18 +17,20 @@ use Spryker\Zed\AppMerchant\Persistence\AppMerchantRepositoryInterface;
 
 class PaymentTransmissionsRequestExtender
 {
+    /**
+     * @var string
+     */
     protected const KEY_PAYMENT_TRANSMISSION = 'paymentTransmission';
+
+    /**
+     * @var string
+     */
     protected const KEY_PAYMENT_TRANSMISSION_ITEMS = 'paymentTransmissionItems';
 
     public function __construct(protected AppMerchantRepositoryInterface $appMerchantRepository)
     {
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer
-     */
     public function extendPaymentTransmissionsRequest(
         PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
     ): PaymentTransmissionsRequestTransfer {
@@ -36,7 +38,7 @@ class PaymentTransmissionsRequestExtender
         $clonedPaymentTransmissionsRequestTransfer->setPaymentTransmissions(new ArrayObject());
 
         [$paymentTransmissionItemsGroupedByOrderReferenceAndMerchant, $merchantReferences] = $this->groupPaymentTransmissionItemsByOrderReferenceAndMerchantReference(
-            $paymentTransmissionsRequestTransfer
+            $paymentTransmissionsRequestTransfer,
         );
 
         return $this->addPaymentTransmissionsForPaymentTransmissionItemsWithMerchants(
@@ -63,8 +65,8 @@ class PaymentTransmissionsRequestExtender
 
         $merchantTransfers = $this->findMerchants($merchantReferences, $paymentTransmissionsRequestTransfer->getTenantIdentifierOrFail());
 
-        foreach ($paymentTransmissionItemsGroupedByOrderReferenceAndMerchant as $paymentTransmissionItemWithMerchant) {
-            foreach ($paymentTransmissionItemWithMerchant as $merchantReference => $merchantData) {
+        foreach ($paymentTransmissionItemsGroupedByOrderReferenceAndMerchant as $paymentTransmissionItemsGrouped) {
+            foreach ($paymentTransmissionItemsGrouped as $merchantReference => $merchantData) {
                 $merchantTransfer = $this->findMerchantForPaymentTransmissionItem($merchantTransfers, $merchantReference);
 
                 if (!$merchantTransfer instanceof MerchantTransfer) {
@@ -100,7 +102,6 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param list<string> $merchantReferences
-     * @param string $tenantIdentifier
      *
      * @return array<\Generated\Shared\Transfer\MerchantTransfer>
      */
@@ -114,8 +115,6 @@ class PaymentTransmissionsRequestExtender
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer $paymentTransmissionsRequestTransfer
-     *
      * @return array<mixed>
      */
     protected function groupPaymentTransmissionItemsByOrderReferenceAndMerchantReference(
@@ -139,12 +138,12 @@ class PaymentTransmissionsRequestExtender
 
                 if (!isset($paymentTransmissionItemsGroupedByOrderReferenceAndMerchant[$orderReference][$merchantReference])) {
                     $paymentTransmissionItemsGroupedByOrderReferenceAndMerchant[$orderReference][$merchantReference] = [
-                        self::KEY_PAYMENT_TRANSMISSION_ITEMS => [],
-                        self::KEY_PAYMENT_TRANSMISSION => clone $paymentTransmissionTransfer,
+                        static::KEY_PAYMENT_TRANSMISSION_ITEMS => [],
+                        static::KEY_PAYMENT_TRANSMISSION => clone $paymentTransmissionTransfer,
                     ];
                 }
 
-                $paymentTransmissionItemsGroupedByOrderReferenceAndMerchant[$orderReference][$merchantReference][self::KEY_PAYMENT_TRANSMISSION_ITEMS][] = $paymentTransmissionItemTransfer;
+                $paymentTransmissionItemsGroupedByOrderReferenceAndMerchant[$orderReference][$merchantReference][static::KEY_PAYMENT_TRANSMISSION_ITEMS][] = $paymentTransmissionItemTransfer;
                 $merchantReferences[$merchantReference] = $merchantReference;
             }
         }
@@ -155,18 +154,15 @@ class PaymentTransmissionsRequestExtender
     /**
      * @param array<mixed> $merchantData
      * @param array<\Generated\Shared\Transfer\MerchantTransfer> $merchantTransfers
-     * @param string $merchantReference
-     *
-     * @return \Generated\Shared\Transfer\PaymentTransmissionTransfer
      */
     public function createSuccessfulPaymentTransmissionTransfer(
         array $merchantData,
         array $merchantTransfers,
         string $merchantReference
     ): PaymentTransmissionTransfer {
-        $paymentTransmissionTransfer = $merchantData[self::KEY_PAYMENT_TRANSMISSION];
+        $paymentTransmissionTransfer = $merchantData[static::KEY_PAYMENT_TRANSMISSION];
         $paymentTransmissionTransfer
-            ->setPaymentTransmissionItems(new ArrayObject($merchantData[self::KEY_PAYMENT_TRANSMISSION_ITEMS]))
+            ->setPaymentTransmissionItems(new ArrayObject($merchantData[static::KEY_PAYMENT_TRANSMISSION_ITEMS]))
             ->setMerchant($this->findMerchantForPaymentTransmissionItem($merchantTransfers, $merchantReference))
             ->setMerchantReference($merchantReference);
 
@@ -175,17 +171,14 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param array<mixed> $merchantData
-     * @param string $merchantReference
-     *
-     * @return \Generated\Shared\Transfer\PaymentTransmissionTransfer
      */
     public function createFailedPaymentTransmissionTransfer(
         array $merchantData,
         string $merchantReference
     ): PaymentTransmissionTransfer {
-        $paymentTransmissionTransfer = $merchantData[self::KEY_PAYMENT_TRANSMISSION];
+        $paymentTransmissionTransfer = $merchantData[static::KEY_PAYMENT_TRANSMISSION];
         $paymentTransmissionTransfer
-            ->setPaymentTransmissionItems(new ArrayObject($merchantData[self::KEY_PAYMENT_TRANSMISSION_ITEMS]))
+            ->setPaymentTransmissionItems(new ArrayObject($merchantData[static::KEY_PAYMENT_TRANSMISSION_ITEMS]))
             ->setMessage(MessageBuilder::merchantByReferenceNotFound($merchantReference))
             ->setIsSuccessful(false);
 

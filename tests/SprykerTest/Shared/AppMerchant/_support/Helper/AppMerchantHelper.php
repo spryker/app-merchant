@@ -11,6 +11,7 @@ use Codeception\Module;
 use Generated\Shared\DataBuilder\MerchantAppOnboardingDetailsBuilder;
 use Generated\Shared\DataBuilder\MerchantAppOnboardingStatusChangedBuilder;
 use Generated\Shared\DataBuilder\MerchantBuilder;
+use Generated\Shared\DataBuilder\PaymentTransmissionItemBuilder;
 use Generated\Shared\DataBuilder\ReadyForMerchantAppOnboardingBuilder;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingDetailsTransfer;
@@ -20,6 +21,7 @@ use Generated\Shared\Transfer\MerchantAppOnboardingStatusChangedTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\OnboardingTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionItemTransfer;
 use Generated\Shared\Transfer\ReadyForMerchantAppOnboardingTransfer;
 use Generated\Shared\Transfer\WebhookRequestTransfer;
 use Generated\Shared\Transfer\WebhookResponseTransfer;
@@ -183,5 +185,10 @@ class AppMerchantHelper extends Module
         $this->assertNotNull($merchantTransfer, 'Expected to have a Merchant persisted but was not.');
         $this->assertSame($expectedMerchantTransfer->getConfig()[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS], $merchantTransfer->getConfig()[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS]);
         $this->assertSame($expectedMerchantTransfer->getTenantIdentifier(), $merchantTransfer->getTenantIdentifier());
+    }
+
+    public function havePaymentTransmissionItem(array $seed): PaymentTransmissionItemTransfer
+    {
+        return (new PaymentTransmissionItemBuilder($seed))->build();
     }
 }
