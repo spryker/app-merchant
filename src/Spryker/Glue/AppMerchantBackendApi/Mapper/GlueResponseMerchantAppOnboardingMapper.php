@@ -28,7 +28,7 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
         GlueResponseTransfer $glueResponseTransfer
     ): GlueResponseTransfer {
         $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchant();
-        $merchantAppOnboarding = $merchantTransfer instanceof MerchantTransfer  ? $merchantTransfer->toArray() : [];
+        $merchantAppOnboarding = $merchantTransfer instanceof MerchantTransfer ? $merchantTransfer->toArray() : [];
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::STRATEGY] = $merchantAppOnboardingResponseTransfer->getStrategy();
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::URL] = $merchantAppOnboardingResponseTransfer->getUrl();
 
