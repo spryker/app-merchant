@@ -4,7 +4,6 @@
         <property name="tenantIdentifier" type="string"/>
         <property name="appConfig" type="AppConfig"/>
         <property name="merchant" type="Merchant" description="Loaded Merchant which is used on the platform side."/>
-        <property name="merchant" type="Merchant"/>
         <property name="successUrl" type="string"/>
         <property name="refreshUrl" type="string"/>
         <property name="cancelUrl" type="string"/>
