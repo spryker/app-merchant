@@ -10,7 +10,6 @@ namespace Spryker\Glue\AppMerchantBackendApi\Mapper;
 use Generated\Shared\Transfer\GlueErrorTransfer;
 use Generated\Shared\Transfer\GlueResponseTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
-use Generated\Shared\Transfer\MerchantTransfer;
 use Symfony\Component\HttpFoundation\Response;
 
 class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantAppOnboardingMapperInterface
@@ -27,8 +26,7 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
         MerchantAppOnboardingResponseTransfer $merchantAppOnboardingResponseTransfer,
         GlueResponseTransfer $glueResponseTransfer
     ): GlueResponseTransfer {
-        /** @phpstan-var \Generated\Shared\Transfer\MerchantTransfer */
-        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchantOrFail();
+        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchant();
         $merchantAppOnboarding = $merchantTransfer !== null  ? $merchantTransfer->toArray() : [];
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::STRATEGY] = $merchantAppOnboardingResponseTransfer->getStrategy();
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::URL] = $merchantAppOnboardingResponseTransfer->getUrl();
