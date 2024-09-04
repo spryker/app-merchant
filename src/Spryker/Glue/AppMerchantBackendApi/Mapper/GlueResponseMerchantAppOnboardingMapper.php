@@ -45,7 +45,7 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
         }
 
         // This is required to set the HTTP status code to 200 OK when the merchant is updated or 201 CREATED when it is created.
-        if ($merchantTransfer->getIsNew() !== true) {
+        if ($merchantTransfer instanceof MerchantTransfer && $merchantTransfer->getIsNew() !== true) {
             $glueResponseTransfer->setHttpStatus(Response::HTTP_OK);
         }
 
