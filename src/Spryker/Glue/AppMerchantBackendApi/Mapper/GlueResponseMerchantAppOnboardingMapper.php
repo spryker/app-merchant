@@ -20,18 +20,15 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
     ): GlueResponseTransfer {
         $glueResponseTransfer = new GlueResponseTransfer();
 
-        /** @phpstan-var \Generated\Shared\Transfer\MerchantTransfer */
-        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchantOrFail();
-
-        return $this->addMerchantAppOnboardingResponseTransferToGlueResponse($merchantTransfer, $merchantAppOnboardingResponseTransfer, $glueResponseTransfer);
+        return $this->addMerchantAppOnboardingResponseTransferToGlueResponse($merchantAppOnboardingResponseTransfer, $glueResponseTransfer);
     }
 
     public function addMerchantAppOnboardingResponseTransferToGlueResponse(
-        MerchantTransfer $merchantTransfer,
         MerchantAppOnboardingResponseTransfer $merchantAppOnboardingResponseTransfer,
         GlueResponseTransfer $glueResponseTransfer
     ): GlueResponseTransfer {
-        $merchantAppOnboarding = $merchantTransfer->toArray();
+        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchant();
+        $merchantAppOnboarding = $merchantTransfer instanceof MerchantTransfer ? $merchantTransfer->toArray() : [];
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::STRATEGY] = $merchantAppOnboardingResponseTransfer->getStrategy();
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::URL] = $merchantAppOnboardingResponseTransfer->getUrl();
 
