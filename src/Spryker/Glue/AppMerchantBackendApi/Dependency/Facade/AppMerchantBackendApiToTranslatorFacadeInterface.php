@@ -9,5 +9,10 @@ namespace Spryker\Glue\AppMerchantBackendApi\Dependency\Facade;
 
 interface AppMerchantBackendApiToTranslatorFacadeInterface
 {
+    /**
+     * @param array<mixed> $parameters
+     * @param string|null $domain
+     * @param string|null $locale
+     */
     public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string;
 }

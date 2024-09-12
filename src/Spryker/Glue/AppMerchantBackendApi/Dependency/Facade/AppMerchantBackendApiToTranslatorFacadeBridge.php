@@ -10,12 +10,23 @@ namespace Spryker\Glue\AppMerchantBackendApi\Dependency\Facade;
 class AppMerchantBackendApiToTranslatorFacadeBridge implements AppMerchantBackendApiToTranslatorFacadeInterface
 {
     /**
+     * @var \Spryker\Zed\Translator\Business\TranslatorFacadeInterface
+     */
+    protected $translatorFacade;
+
+    /**
      * @param \Spryker\Zed\Translator\Business\TranslatorFacadeInterface $translatorFacade
      */
-    public function __construct(protected $translatorFacade)
+    public function __construct($translatorFacade)
     {
+        $this->translatorFacade = $translatorFacade;
     }
 
+    /**
+     * @param array<mixed> $parameters
+     * @param string|null $domain
+     * @param string|null $locale
+     */
     public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
     {
         return $this->translatorFacade->trans($id, $parameters, $domain, $locale);

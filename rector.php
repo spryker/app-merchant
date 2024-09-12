@@ -42,10 +42,12 @@ return static function (RectorConfig $rectorConfig): void {
         ],
         ClassPropertyAssignToConstructorPromotionRector::class => [
             __DIR__ . '/src/Spryker/Glue/AppMerchantBackendApi/Dependency/Facade/AppMerchantBackendApiToAppMerchantFacadeBridge.php',
+            __DIR__ . '/src/Spryker/Glue/AppMerchantBackendApi/Dependency/Facade/AppMerchantBackendApiToTranslatorFacadeBridge.php',
             __DIR__ . '/src/Spryker/Zed/AppMerchant/Dependency/Facade/AppMerchantToAppKernelFacadeBridge.php',
         ],
         AddParamTypeFromPropertyTypeRector::class => [
             __DIR__ . '/src/Spryker/Glue/AppMerchantBackendApi/Dependency/Facade/AppMerchantBackendApiToAppMerchantFacadeBridge.php',
+            __DIR__ . '/src/Spryker/Glue/AppMerchantBackendApi/Dependency/Facade/AppMerchantBackendApiToTranslatorFacadeBridge.php',
             __DIR__ . '/src/Spryker/Zed/AppMerchant/Dependency/Facade/AppMerchantToAppKernelFacadeBridge.php',
         ],
     ]);

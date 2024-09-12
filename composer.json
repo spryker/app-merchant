@@ -42,8 +42,7 @@
         "spryker/propel": "*",
         "spryker/router": "^1.19",
         "spryker/testify": "*",
-        "spryker/testify-async-api": "*",
-        "spryker/translator": "^1.13"
+        "spryker/testify-async-api": "*"
     },
     "autoload": {
         "psr-4": {

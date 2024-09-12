@@ -101,9 +101,6 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param list<string> $merchantReferences
-     * @param string $tenantIdentifier
-     *
-     * @return \Generated\Shared\Transfer\MerchantCollectionTransfer
      */
     protected function getMerchantCollection(array $merchantReferences, string $tenantIdentifier): MerchantCollectionTransfer
     {
@@ -153,8 +150,6 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param array<mixed> $merchantData
-     * @param \Generated\Shared\Transfer\MerchantCollectionTransfer$merchantCollectionTransfer
-     * @param string $merchantReference
      */
     public function createSuccessfulPaymentTransmissionTransfer(
         array $merchantData,

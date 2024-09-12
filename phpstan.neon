@@ -2,4 +2,5 @@ parameters:
     level: 8
     ignoreErrors:
           - '#Call to method appMerchant\(\) on an unknown class Generated\\GlueBackend\\Ide\\AutoCompletion.#'
+          - '#Call to method translator\(\) on an unknown class Generated\\GlueBackend\\Ide\\AutoCompletion.#'
           - '#Method Spryker\\Zed\\AppKernel\\Business\\AppKernelFacadeInterface::getConfig\(\) invoked with 2 parameters, 1 required.#'
