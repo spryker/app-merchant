@@ -7,6 +7,7 @@
 
 namespace Spryker\Zed\AppMerchant\Persistence;
 
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 
@@ -16,10 +17,7 @@ interface AppMerchantRepositoryInterface
         MerchantCriteriaTransfer $merchantCriteriaTransfer
     ): ?MerchantTransfer;
 
-    /**
-     * @return array<\Generated\Shared\Transfer\MerchantTransfer>
-     */
-    public function findMerchants(
+    public function getMerchantCollection(
         MerchantCriteriaTransfer $merchantCriteriaTransfer
-    ): array;
+    ): MerchantCollectionTransfer;
 }

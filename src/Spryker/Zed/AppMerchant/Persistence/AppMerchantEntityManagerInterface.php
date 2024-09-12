@@ -14,4 +14,6 @@ interface AppMerchantEntityManagerInterface
     public function saveMerchant(MerchantTransfer $merchantTransfer): MerchantTransfer;
 
     public function updateMerchant(MerchantTransfer $merchantTransfer): MerchantTransfer;
+
+    public function deleteMerchant(MerchantTransfer $merchantTransfer): void;
 }

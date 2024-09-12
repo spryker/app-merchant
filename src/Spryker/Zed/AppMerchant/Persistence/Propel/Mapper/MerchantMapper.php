@@ -7,11 +7,26 @@
 
 namespace Spryker\Zed\AppMerchant\Persistence\Propel\Mapper;
 
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Orm\Zed\AppMerchant\Persistence\SpyMerchant;
+use Propel\Runtime\Collection\Collection;
 
 class MerchantMapper
 {
+    public function mapMerchantEntityCollectionToMerchantCollectionTransfer(
+        Collection $merchantEntityCollection,
+        MerchantCollectionTransfer $merchantCollectionTransfer
+    ): MerchantCollectionTransfer {
+        foreach ($merchantEntityCollection as $merchantEntity) {
+            $merchantCollectionTransfer->addMerchant(
+                $this->mapMerchantEntityToMerchantTransfer($merchantEntity, new MerchantTransfer()),
+            );
+        }
+
+        return $merchantCollectionTransfer;
+    }
+
     public function mapMerchantEntityToMerchantTransfer(
         SpyMerchant $spyMerchant,
         MerchantTransfer $merchantTransfer

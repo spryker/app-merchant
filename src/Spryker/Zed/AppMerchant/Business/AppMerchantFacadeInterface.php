@@ -10,6 +10,7 @@ namespace Spryker\Zed\AppMerchant\Business;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
@@ -78,4 +79,22 @@ interface AppMerchantFacadeInterface
      * @api
      */
     public function findMerchant(MerchantCriteriaTransfer $merchantCriteriaTransfer): ?MerchantTransfer;
+
+    /**
+     * Specification:
+     * - Retrieves a collection of merchants based on the provided criteria.
+     *
+     * @api
+     */
+    public function getMerchantCollection(
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): MerchantCollectionTransfer;
+
+    /**
+     * Specification:
+     * - Deletes all merchants related to the tenant.
+     *
+     * @api
+     */
+    public function deleteMerchantByAppConfig(AppConfigTransfer $appConfigTransfer): void;
 }

@@ -8,6 +8,7 @@
 namespace Spryker\Glue\AppMerchantBackendApi;
 
 use Spryker\Glue\AppMerchantBackendApi\Dependency\Facade\AppMerchantBackendApiToAppMerchantFacadeInterface;
+use Spryker\Glue\AppMerchantBackendApi\Dependency\Facade\AppMerchantBackendApiToTranslatorFacadeInterface;
 use Spryker\Glue\AppMerchantBackendApi\Mapper\GlueRequestMerchantAppOnboardingMapper;
 use Spryker\Glue\AppMerchantBackendApi\Mapper\GlueRequestMerchantAppOnboardingMapperInterface;
 use Spryker\Glue\AppMerchantBackendApi\Mapper\GlueResponseMerchantAppOnboardingMapper;
@@ -30,5 +31,11 @@ class AppMerchantBackendApiFactory extends AbstractFactory
     {
         /** @phpstan-var \Spryker\Glue\AppMerchantBackendApi\Dependency\Facade\AppMerchantBackendApiToAppMerchantFacadeInterface */
         return $this->getProvidedDependency(AppMerchantBackendApiDependencyProvider::FACADE_APP_MERCHANT);
+    }
+
+    public function getTranslatorFacade(): AppMerchantBackendApiToTranslatorFacadeInterface
+    {
+        /** @phpstan-var \Spryker\Glue\AppMerchantBackendApi\Dependency\Facade\AppMerchantBackendApiToTranslatorFacadeInterface */
+        return $this->getProvidedDependency(AppMerchantBackendApiDependencyProvider::FACADE_TRANSLATOR);
     }
 }

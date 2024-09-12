@@ -66,6 +66,10 @@
         <property name="isNew" type="bool"/>
     </transfer>
 
+    <transfer name="MerchantCollection" strict="true">
+        <property name="merchants" type="Merchant[]" singular="merchant"/>
+    </transfer>
+
     <transfer name="MerchantAppOnboardingInitializationRequest" strict="true">
         <property name="merchant" type="Merchant"/>
         <property name="appIdentifier" type="string" description="The identifier of an App that supports the onboarding of Merchants"/>

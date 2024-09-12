@@ -10,6 +10,7 @@ namespace Spryker\Zed\AppMerchant\Business;
 use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
@@ -76,5 +77,17 @@ class AppMerchantFacade extends AbstractFacade implements AppMerchantFacadeInter
     public function findMerchant(MerchantCriteriaTransfer $merchantCriteriaTransfer): ?MerchantTransfer
     {
         return $this->getRepository()->findMerchant($merchantCriteriaTransfer);
+    }
+
+    public function getMerchantCollection(
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): MerchantCollectionTransfer {
+        return $this->getRepository()->getMerchantCollection($merchantCriteriaTransfer);
+    }
+
+    public function deleteMerchantByAppConfig(AppConfigTransfer $appConfigTransfer): void
+    {
+        $this->getFactory()->createMerchantDeleter()
+            ->deleteMerchantByAppConfig($appConfigTransfer);
     }
 }

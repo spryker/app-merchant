@@ -9,6 +9,7 @@ namespace Spryker\Zed\AppMerchant\Business;
 
 use Spryker\Zed\AppMerchant\AppMerchantDependencyProvider;
 use Spryker\Zed\AppMerchant\Business\AppConfig\AppConfigLoader;
+use Spryker\Zed\AppMerchant\Business\Merchant\Writer\MerchantDeleter;
 use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\MerchantAppOnboarding;
 use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\Writer\MerchantAppOnboardingCreator;
 use Spryker\Zed\AppMerchant\Business\MerchantAppOnboarding\Writer\MerchantAppOnboardingCreatorInterface;
@@ -98,5 +99,14 @@ class AppMerchantBusinessFactory extends AbstractBusinessFactory
     public function createPaymentTransmissionsRequestExtender(): PaymentTransmissionsRequestExtender
     {
         return new PaymentTransmissionsRequestExtender($this->getRepository());
+    }
+
+    public function createMerchantDeleter(): MerchantDeleter
+    {
+        return new MerchantDeleter(
+            $this->createMessageSender(),
+            $this->getRepository(),
+            $this->getEntityManager(),
+        );
     }
 }

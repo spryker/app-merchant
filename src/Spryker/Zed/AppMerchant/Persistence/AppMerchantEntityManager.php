@@ -59,4 +59,12 @@ class AppMerchantEntityManager extends AbstractEntityManager implements AppMerch
 
         return $this->getFactory()->createMerchantMapper()->mapMerchantEntityToMerchantTransfer($spyMerchantEntity, $merchantTransfer);
     }
+
+    public function deleteMerchant(MerchantTransfer $merchantTransfer): void
+    {
+        $this->getFactory()->createMerchantQuery()
+            ->filterByMerchantReference($merchantTransfer->getMerchantReferenceOrFail())
+            ->filterByTenantIdentifier($merchantTransfer->getTenantIdentifierOrFail())
+            ->delete();
+    }
 }

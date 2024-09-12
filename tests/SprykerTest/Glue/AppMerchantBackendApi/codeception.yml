@@ -37,3 +37,22 @@ suites:
                 - \SprykerTest\Zed\AppMerchant\Helper\MerchantAppOnboardingCrudHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
                 - \SprykerTest\Zed\MessageBroker\Helper\InMemoryMessageBrokerHelper
+
+    Plugin:
+        actor: AppMerchantBackendApiPluginTester
+        modules:
+            enabled:
+                - \SprykerTest\Shared\AppMerchant\Helper\AppMerchantHelper
+                - \SprykerTest\Shared\AppPayment\Helper\AppPaymentHelper
+                - \SprykerTest\Zed\AppKernel\Helper\AppKernelHelper
+                - \SprykerTest\Shared\AppKernel\Helper\AppConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                -   \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                        projectNamespaces:
+                            - Spryker
+                - \SprykerTest\Glue\Testify\Helper\DependencyProviderHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - Asserts
