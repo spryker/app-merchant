@@ -11,6 +11,7 @@ use Codeception\Test\Unit;
 use Generated\Shared\Transfer\GlueErrorConfirmTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
+use Spryker\Glue\AppKernel\AppKernelConfig;
 use Spryker\Glue\AppMerchantBackendApi\AppMerchantBackendApiConfig;
 use Spryker\Glue\AppMerchantBackendApi\AppMerchantBackendApiDependencyProvider;
 use Spryker\Glue\AppMerchantBackendApi\Dependency\Facade\AppMerchantBackendApiToTranslatorFacadeInterface;
@@ -44,7 +45,7 @@ class MerchantConfirmDisconnectionRequestValidatorPluginTest extends Unit
 
     protected AppMerchantBackendApiPluginTester $tester;
 
-    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereIsNoTenantIdentifierGivenInTheRequest(): void
+    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereIsNoExistingTenant(): void
     {
         // Arrange
         $this->tester->setDependency(AppMerchantBackendApiDependencyProvider::FACADE_TRANSLATOR, $this->getTranslatorFacadeMock());
@@ -59,12 +60,12 @@ class MerchantConfirmDisconnectionRequestValidatorPluginTest extends Unit
         $this->assertFalse($glueRequestValidationTransfer->getIsValid());
         $this->assertCount(1, $glueRequestValidationTransfer->getErrors());
         $this->assertSame(
-            AppMerchantBackendApiConfig::ERROR_CODE_PAYMENT_DISCONNECTION_TENANT_IDENTIFIER_MISSING,
+            AppKernelConfig::ERROR_CODE_PAYMENT_DISCONNECTION_TENANT_IDENTIFIER_MISSING,
             $glueRequestValidationTransfer->getErrors()[0]->getCode(),
         );
     }
 
-    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsSuccessIfThereAreNoMerchantsForTenantIdentifierGivenInTheRequest(): void
+    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsSuccessIfThereAreNoMerchantsForExistingTenant(): void
     {
         // Arrange
         $this->tester->setDependency(AppMerchantBackendApiDependencyProvider::FACADE_TRANSLATOR, $this->getTranslatorFacadeMock());
@@ -83,7 +84,7 @@ class MerchantConfirmDisconnectionRequestValidatorPluginTest extends Unit
         $this->assertTrue($glueRequestValidationTransfer->getIsValid());
     }
 
-    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereAreMerchantsForTenantIdentifierGivenInTheRequest(): void
+    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereAreMerchantsForExistingTenant(): void
     {
         // Arrange
         $this->tester->setDependency(AppMerchantBackendApiDependencyProvider::FACADE_TRANSLATOR, $this->getTranslatorFacadeMock());
@@ -119,7 +120,7 @@ class MerchantConfirmDisconnectionRequestValidatorPluginTest extends Unit
      *
      * @return void
      */
-    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereAreMerchantsForTenantIdentifierGivenInTheRequestAndTheRequestContainsConfirmationCanceledResponse(
+    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsErrorIfThereAreMerchantsForExistingTenantAndTheRequestContainsConfirmationCanceledResponse(
         string $confirmationStatus
     ): void {
         // Arrange
@@ -149,7 +150,7 @@ class MerchantConfirmDisconnectionRequestValidatorPluginTest extends Unit
         );
     }
 
-    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsSuccessIfThereAreMerchantsForTenantIdentifierGivenInTheRequestAndTheRequestContainsConfirmationSuccessfulResponse(): void
+    public function testMerchantConfirmDisconnectionRequestValidatorPluginReturnsSuccessIfThereAreMerchantsForExistingTenantAndTheRequestContainsConfirmationSuccessfulResponse(): void
     {
         // Arrange
         $this->tester->setDependency(AppMerchantBackendApiDependencyProvider::FACADE_TRANSLATOR, $this->getTranslatorFacadeMock());

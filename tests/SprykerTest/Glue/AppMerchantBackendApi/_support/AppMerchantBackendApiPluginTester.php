@@ -30,8 +30,4 @@ use Codeception\Actor;
 class AppMerchantBackendApiPluginTester extends Actor
 {
     use _generated\AppMerchantBackendApiPluginTesterActions;
-
-    /**
-     * Define custom actions here
-     */
 }
