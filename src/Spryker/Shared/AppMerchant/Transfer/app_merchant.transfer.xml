@@ -61,6 +61,7 @@
 
     <transfer name="Merchant" strict="true">
         <property name="merchantReference" type="string"/>
+        <property name="name" type="string"/>
         <property name="tenantIdentifier" type="string"/>
         <property name="config" type="array"/>
         <property name="isNew" type="bool"/>

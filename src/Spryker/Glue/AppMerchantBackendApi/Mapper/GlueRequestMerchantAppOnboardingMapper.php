@@ -20,6 +20,7 @@ class GlueRequestMerchantAppOnboardingMapper implements GlueRequestMerchantAppOn
         $merchantTransfer->fromArray($glueRequestTransfer->getAttributes(), true);
         $merchantTransfer->setTenantIdentifier($glueRequestTransfer->getMeta()['x-tenant-identifier'][0] ?? '');
         $merchantTransfer->setMerchantReference($glueRequestTransfer->getMeta()['x-merchant-reference'][0] ?? '');
+        $merchantTransfer->setName($glueRequestTransfer->getMeta()['x-merchant-name'][0] ?? '');
 
         $merchantAppOnboardingRequestTransfer = new MerchantAppOnboardingRequestTransfer();
         $merchantAppOnboardingRequestTransfer->fromArray($glueRequestTransfer->getAttributes(), true);
