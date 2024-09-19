@@ -7,7 +7,6 @@
 
 namespace Spryker\Glue\AppMerchantBackendApi\Plugin\GlueApplication;
 
-use Generated\Shared\Transfer\GlueErrorTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\GlueRequestValidationTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
@@ -33,15 +32,10 @@ class MerchantConfirmDisconnectionRequestValidatorPlugin extends AbstractConfirm
                 ->setIsValid(true);
         }
 
-        return (new GlueRequestValidationTransfer())
-            ->setIsValid(false)
-            ->addError(
-                (new GlueErrorTransfer())
-                    ->setCode(AppMerchantBackendApiConfig::ERROR_CODE_PAYMENT_DISCONNECTION_CANNOT_BE_PROCEEDED)
-                    ->setMessage(
-                        $this->getFactory()->getTranslatorFacade()->trans('The payment App cannot be disconnected when there are active Merchants connected to the Marketplace. Merchants may not receive payout if you delete the App. Disconnect the merchants to continue.'),
-                    ),
-            );
+        return $this->getFailedGlueRequestValidationTransfer(
+            AppMerchantBackendApiConfig::ERROR_CODE_PAYMENT_DISCONNECTION_CANNOT_BE_PROCEEDED,
+            $this->getFactory()->getTranslatorFacade()->trans('The payment App cannot be disconnected when there are active Merchants connected to the Marketplace. Merchants may not receive payout if you delete the App. Disconnect the merchants to continue.'),
+        );
     }
 
     protected function getCancellationErrorCode(): string
