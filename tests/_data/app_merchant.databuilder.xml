@@ -20,6 +20,7 @@
 
     <transfer name="Merchant" strict="true">
         <property name="merchantReference" dataBuilderRule="uuid()"/>
+        <property name="name" dataBuilderRule="uuid()"/>
         <property name="tenantIdentifier" dataBuilderRule="uuid()"/>
     </transfer>
 

@@ -59,9 +59,11 @@ class MerchantAppOnboardingPostRestApiCest
 
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -84,9 +86,11 @@ class MerchantAppOnboardingPostRestApiCest
 
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -107,6 +111,7 @@ class MerchantAppOnboardingPostRestApiCest
         // Arrange
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->haveAppConfigForTenant($tenantIdentifier);
 
@@ -125,6 +130,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -155,6 +161,7 @@ class MerchantAppOnboardingPostRestApiCest
         // Arrange
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->haveAppConfigForTenant($tenantIdentifier);
 
@@ -178,6 +185,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -210,6 +218,7 @@ class MerchantAppOnboardingPostRestApiCest
         // Arrange
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->haveAppConfigForTenant($tenantIdentifier);
 
@@ -228,6 +237,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -258,6 +268,7 @@ class MerchantAppOnboardingPostRestApiCest
         // Arrange
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->haveAppConfigForTenant($tenantIdentifier);
 
@@ -282,6 +293,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
@@ -341,6 +353,7 @@ class MerchantAppOnboardingPostRestApiCest
         // Arrange
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->haveAppConfigForTenant($tenantIdentifier);
         $expectedMessage = 'Platform not configured properly to onboard merchants';
@@ -356,6 +369,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
+        $I->addHeader('x-merchant-name', $merchantReference);
         $I->addHeader('content-type', 'application/json');
 
         // Act
