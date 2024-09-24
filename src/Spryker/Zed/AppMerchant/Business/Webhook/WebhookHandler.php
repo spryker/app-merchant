@@ -49,7 +49,7 @@ class WebhookHandler
                 [
                     'request' => $webhookRequestTransfer->toArray(),
                     WebhookRequestTransfer::TENANT_IDENTIFIER => $webhookRequestTransfer->getTenantIdentifier(),
-                ]
+                ],
             );
             $webhookResponseTransfer = new WebhookResponseTransfer();
             $webhookResponseTransfer
