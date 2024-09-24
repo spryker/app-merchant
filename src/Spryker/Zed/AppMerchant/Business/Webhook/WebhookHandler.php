@@ -44,7 +44,13 @@ class WebhookHandler
             $webhookRequestTransfer = $this->extendWebhookRequestTransfer($webhookRequestTransfer);
             $webhookResponseTransfer = $this->appMerchantPlatformPlugin->handleWebhook($webhookRequestTransfer, $webhookResponseTransfer);
         } catch (Throwable $throwable) {
-            $this->getLogger()->error($throwable->getMessage());
+            $this->getLogger()->error(
+                $throwable->getMessage(),
+                [
+                    'request' => $webhookRequestTransfer->toArray(),
+                    WebhookRequestTransfer::TENANT_IDENTIFIER => $webhookRequestTransfer->getTenantIdentifier(),
+                ]
+            );
             $webhookResponseTransfer = new WebhookResponseTransfer();
             $webhookResponseTransfer
                 ->setIsSuccessful(false)
