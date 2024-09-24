@@ -59,6 +59,7 @@ class MerchantAppOnboardingPostRestApiCest
 
         $merchantReference = Uuid::uuid4()->toString();
         $tenantIdentifier = Uuid::uuid4()->toString();
+        $tenantName = Uuid::uuid4()->toString();
 
         $I->addHeader('x-tenant-identifier', $tenantIdentifier);
         $I->addHeader('x-merchant-reference', $merchantReference);
@@ -90,7 +91,7 @@ class MerchantAppOnboardingPostRestApiCest
         $I->addHeader('content-type', 'application/json');
 
         // Act
-        $I->sendPost($url, ['merchant' => [], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
+        $I->sendPost($url, ['merchant' => ['name' => 'name', 'merchantReference' => $merchantReference], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
 
         // Assert
         $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
@@ -128,7 +129,7 @@ class MerchantAppOnboardingPostRestApiCest
         $I->addHeader('content-type', 'application/json');
 
         // Act
-        $I->sendPost($url, ['merchant' => [], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
+        $I->sendPost($url, ['merchant' => ['name' => 'name', 'merchantReference' => $merchantReference], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
 
         // Assert
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
@@ -181,7 +182,7 @@ class MerchantAppOnboardingPostRestApiCest
         $I->addHeader('content-type', 'application/json');
 
         // Act
-        $I->sendPost($url, ['merchant' => [], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
+        $I->sendPost($url, ['merchant' => ['name' => 'name', 'merchantReference' => $merchantReference], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
 
         // Assert
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
@@ -231,7 +232,7 @@ class MerchantAppOnboardingPostRestApiCest
         $I->addHeader('content-type', 'application/json');
 
         // Act
-        $I->sendPost($url, ['merchant' => [], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
+        $I->sendPost($url, ['merchant' => ['name' => 'name'], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
 
         // Assert
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
@@ -359,7 +360,7 @@ class MerchantAppOnboardingPostRestApiCest
         $I->addHeader('content-type', 'application/json');
 
         // Act
-        $I->sendPost($url, ['merchant' => [], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
+        $I->sendPost($url, ['merchant' => ['name' => 'name', 'merchantReference' => $merchantReference], 'successUrl' => 'successUrl', 'errorUrl' => 'errorUrl', 'cancelUrl' => 'cancelUrl']);
 
         // Assert
         $I->seeResponseCodeIs(Response::HTTP_PRECONDITION_FAILED);
