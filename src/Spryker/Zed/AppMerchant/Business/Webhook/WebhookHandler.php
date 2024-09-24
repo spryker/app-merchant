@@ -47,7 +47,7 @@ class WebhookHandler
             $this->getLogger()->error(
                 $throwable->getMessage(),
                 [
-                    'request' => $webhookRequestTransfer->toArray(),
+                    'request_data' => $webhookRequestTransfer->toArray(),
                     WebhookRequestTransfer::TENANT_IDENTIFIER => $webhookRequestTransfer->getTenantIdentifier(),
                 ],
             );
