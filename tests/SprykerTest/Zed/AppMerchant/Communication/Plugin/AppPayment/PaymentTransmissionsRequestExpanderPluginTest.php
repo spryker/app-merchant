@@ -10,7 +10,7 @@ namespace SprykerTest\Zed\AppMerchant\Communication\Plugin\AppPayment;
 use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\MerchantTransfer;
-use Generated\Shared\Transfer\OrderItemTransfer;
+use Generated\Shared\Transfer\PaymentTransmissionItemTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionTransfer;
 use Orm\Zed\AppPayment\Persistence\SpyPaymentQuery;
@@ -49,18 +49,18 @@ class PaymentTransmissionsRequestExpanderPluginTest extends Unit
         $merchantTransfer1 = $this->tester->haveMerchantPersisted([MerchantTransfer::TENANT_IDENTIFIER => $tenantIdentifier]);
         $merchantTransfer2 = $this->tester->haveMerchantPersisted([MerchantTransfer::TENANT_IDENTIFIER => $tenantIdentifier]);
 
-        /** @var array<\Generated\Shared\Transfer\OrderItemTransfer> $orderItems */
+        /** @var array<\Generated\Shared\Transfer\PaymentTransmissionItemTransfer> $orderItems */
         $orderItems = [
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference1]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference1, OrderItemTransfer::MERCHANT_REFERENCE => $merchantTransfer1->getMerchantReference()]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference2, OrderItemTransfer::MERCHANT_REFERENCE => $merchantTransfer2->getMerchantReference()]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference1]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference1, OrderItemTransfer::MERCHANT_REFERENCE => $merchantTransfer1->getMerchantReference()]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference2, OrderItemTransfer::MERCHANT_REFERENCE => $merchantTransfer2->getMerchantReference()]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference1]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference1, PaymentTransmissionItemTransfer::MERCHANT_REFERENCE => $merchantTransfer1->getMerchantReference()]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference2, PaymentTransmissionItemTransfer::MERCHANT_REFERENCE => $merchantTransfer2->getMerchantReference()]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference1]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference1, PaymentTransmissionItemTransfer::MERCHANT_REFERENCE => $merchantTransfer1->getMerchantReference()]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference2, PaymentTransmissionItemTransfer::MERCHANT_REFERENCE => $merchantTransfer2->getMerchantReference()]),
         ];
 
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
-        $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
+        $paymentTransmissionTransfer->setPaymentTransmissionItems(new ArrayObject($orderItems));
 
         $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
         $paymentTransmissionsRequestTransfer
@@ -104,12 +104,12 @@ class PaymentTransmissionsRequestExpanderPluginTest extends Unit
 
         /** @var array<\Generated\Shared\Transfer\OrderItemTransfer> $orderItems */
         $orderItems = [
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference]),
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference]),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference]),
         ];
 
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
-        $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
+        $paymentTransmissionTransfer->setPaymentTransmissionItems(new ArrayObject($orderItems));
 
         $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
         $paymentTransmissionsRequestTransfer
@@ -130,13 +130,13 @@ class PaymentTransmissionsRequestExpanderPluginTest extends Unit
         $tenantIdentifier = Uuid::uuid4()->toString();
         $orderReference = Uuid::uuid4()->toString();
 
-        /** @var array<\Generated\Shared\Transfer\OrderItemTransfer> $orderItems */
+        /** @var array<\Generated\Shared\Transfer\PaymentTransmissionItemTransfer> $orderItems */
         $orderItems = [
-            $this->tester->haveOrderItem([OrderItemTransfer::ORDER_REFERENCE => $orderReference, OrderItemTransfer::MERCHANT_REFERENCE => 'non-existing-merchant-reference']),
+            $this->tester->havePaymentTransmissionItem([PaymentTransmissionItemTransfer::ORDER_REFERENCE => $orderReference, PaymentTransmissionItemTransfer::MERCHANT_REFERENCE => 'non-existing-merchant-reference']),
         ];
 
         $paymentTransmissionTransfer = new PaymentTransmissionTransfer();
-        $paymentTransmissionTransfer->setOrderItems(new ArrayObject($orderItems));
+        $paymentTransmissionTransfer->setPaymentTransmissionItems(new ArrayObject($orderItems));
 
         $paymentTransmissionsRequestTransfer = new PaymentTransmissionsRequestTransfer();
         $paymentTransmissionsRequestTransfer

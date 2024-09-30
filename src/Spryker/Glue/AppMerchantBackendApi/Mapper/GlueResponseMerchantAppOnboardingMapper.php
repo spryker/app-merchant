@@ -20,18 +20,15 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
     ): GlueResponseTransfer {
         $glueResponseTransfer = new GlueResponseTransfer();
 
-        /** @phpstan-var \Generated\Shared\Transfer\MerchantTransfer */
-        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchantOrFail();
-
-        return $this->addMerchantAppOnboardingResponseTransferToGlueResponse($merchantTransfer, $merchantAppOnboardingResponseTransfer, $glueResponseTransfer);
+        return $this->addMerchantAppOnboardingResponseTransferToGlueResponse($merchantAppOnboardingResponseTransfer, $glueResponseTransfer);
     }
 
     public function addMerchantAppOnboardingResponseTransferToGlueResponse(
-        MerchantTransfer $merchantTransfer,
         MerchantAppOnboardingResponseTransfer $merchantAppOnboardingResponseTransfer,
         GlueResponseTransfer $glueResponseTransfer
     ): GlueResponseTransfer {
-        $merchantAppOnboarding = $merchantTransfer->toArray();
+        $merchantTransfer = $merchantAppOnboardingResponseTransfer->getMerchant();
+        $merchantAppOnboarding = $merchantTransfer instanceof MerchantTransfer ? $merchantTransfer->toArray() : [];
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::STRATEGY] = $merchantAppOnboardingResponseTransfer->getStrategy();
         $merchantAppOnboarding[MerchantAppOnboardingResponseTransfer::URL] = $merchantAppOnboardingResponseTransfer->getUrl();
 
@@ -48,7 +45,7 @@ class GlueResponseMerchantAppOnboardingMapper implements GlueResponseMerchantApp
         }
 
         // This is required to set the HTTP status code to 200 OK when the merchant is updated or 201 CREATED when it is created.
-        if ($merchantTransfer->getIsNew() !== true) {
+        if ($merchantTransfer instanceof MerchantTransfer && $merchantTransfer->getIsNew() !== true) {
             $glueResponseTransfer->setHttpStatus(Response::HTTP_OK);
         }
 
