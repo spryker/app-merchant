@@ -40,7 +40,7 @@ class AppMerchantRepository extends AbstractRepository implements AppMerchantRep
     {
         $spyMerchantQuery = $this->getFactory()->createMerchantQuery();
         $merchantEntityQuery = $spyMerchantQuery
-            ->filterByMerchantReference_In($merchantCriteriaTransfer->getMerchantReferencesOrFail())
+            ->filterByMerchantReference_In($merchantCriteriaTransfer->getMerchantReferences())
             ->filterByTenantIdentifier($merchantCriteriaTransfer->getTenantIdentifierOrFail());
 
         $merchantEntityCollection = $merchantEntityQuery->find();
