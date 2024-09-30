@@ -107,7 +107,7 @@ class WebhookHandler
         $merchantTransfer = $this->appMerchantRepository->findMerchant($merchantCriteriaTransfer);
 
         if ($merchantTransfer instanceof MerchantTransfer && $this->requiresUpdate($merchantTransfer, $merchantAppOnboardingTransfer)) {
-            $config = $merchantTransfer->getConfig() ?? [];
+            $config = $merchantTransfer->getConfig();
             $config[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS] = $merchantAppOnboardingTransfer->getStatus();
             $merchantTransfer->setConfig($config);
 
@@ -119,7 +119,7 @@ class WebhookHandler
 
     protected function requiresUpdate(MerchantTransfer $merchantTransfer, MerchantAppOnboardingTransfer $merchantAppOnboardingTransfer): bool
     {
-        if ($merchantTransfer->getConfig() === null || $merchantTransfer->getConfig() === []) {
+        if ($merchantTransfer->getConfig() === []) {
             return true;
         }
 

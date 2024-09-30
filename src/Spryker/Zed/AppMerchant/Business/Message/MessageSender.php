@@ -36,7 +36,7 @@ class MessageSender
         MerchantTransfer $merchantTransfer,
         AppConfigTransfer $appConfigTransfer
     ): void {
-        $merchantOnboardingStatus = $merchantTransfer->getConfigOrFail()[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS];
+        $merchantOnboardingStatus = $merchantTransfer->getConfig()[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS];
 
         $merchantAppOnboardingStatusChangedTransfer = new MerchantAppOnboardingStatusChangedTransfer();
         $merchantAppOnboardingStatusChangedTransfer

@@ -55,7 +55,7 @@
 
     <transfer name="MerchantCriteria" strict="true">
         <property name="merchantReference" type="string"/>
-        <property name="merchantReferences" type="array"/>
+        <property name="merchantReferences" type="array" singular="merchantReference"/>
         <property name="tenantIdentifier" type="string"/>
     </transfer>
 
@@ -63,7 +63,7 @@
         <property name="merchantReference" type="string"/>
         <property name="name" type="string"/>
         <property name="tenantIdentifier" type="string"/>
-        <property name="config" type="array"/>
+        <property name="config" type="array" singular="config"/>
         <property name="isNew" type="bool"/>
     </transfer>
 
