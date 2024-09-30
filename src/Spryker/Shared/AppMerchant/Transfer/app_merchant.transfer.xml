@@ -55,7 +55,7 @@
 
     <transfer name="MerchantCriteria" strict="true">
         <property name="merchantReference" type="string"/>
-        <property name="merchantReferences" type="array"/>
+        <property name="merchantReferences" type="array" singular="merchantReference"/>
         <property name="tenantIdentifier" type="string"/>
     </transfer>
 
