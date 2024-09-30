@@ -27,11 +27,11 @@ vendor/bin/codecept run
 
 # Documentation
 
-The `AppMerchant` package contains the Glue code with a controller and a routing plugin that enables the Mini-Framework to onboard Merchants to an App. The Route Plugin provides the following URL:
+The `AppMerchant` package contains the Spryker Glue Application code with a controller and a routing plugin that enables the [Mini-Framework](https://github.com/spryker-projects/mini-framework) to onboard Spryker Merchants to an App. The Route Plugin provides the following URL:
 
 - `/merchants-onboarding`
 
-This endpoint is used by Merchants after the Tenant was notified via the `ReadyForMerchantAppOnboarding` message. When an App uses the `AppMerchant` and needs Merchant Onboarding to the App the `\Spryker\Zed\AppMerchant\Communication\Plugin\AppKernel\InformTenantAboutMerchantAppOnboardingReadinessConfigurationAfterSavePlugin` needs to be added on the Apps project level code.
+This endpoint is used by Merchants after the Spryker application (tenant) is notified via the `ReadyForMerchantAppOnboarding` message. When an App uses the `AppMerchant` package and needs Merchant Onboarding to the App the `\Spryker\Zed\AppMerchant\Communication\Plugin\AppKernel\InformTenantAboutMerchantAppOnboardingReadinessConfigurationAfterSavePlugin` needs to be added on the App's project level code.
 
 ## High-Level Architecture
 
@@ -41,7 +41,7 @@ This endpoint is used by Merchants after the Tenant was notified via the `ReadyF
 
 ### Tenant Onboarding
 
-Before Merchants can be boarded to an App it is required that the Tenant's application is onboarded for the use of this App. When an App config is created/updated the `ReadyForMerchantAppOnboarding` message will be sent to the Tenant. It contains the following information which can be different for each App implementation:
+Before Merchants can be boarded to an App it is required that the Tenant's application is enabled to use this App. When an App config is created/updated the `ReadyForMerchantAppOnboarding` message will be sent to the Tenant. It contains the following information which can be different for each App implementation:
 
 - `onboarding` - This field contains the supported onboarding logic.
 - `type` - The type of onboarding, every App can have multiple onboardings e.g. for legal reasons and for the App functionality itself, etc.
@@ -51,7 +51,7 @@ Before Merchants can be boarded to an App it is required that the Tenant's appli
 - `merchantOnboardingStates` - A list of possible states the onboarding of a Merchant can have. Each state can have attributes that are used on the Tenant side for displaying purposes.
     - `statusText` - The text that should be displayed as status. (Can be translated on the Tenant side)
     - `displayText` - An additional text that can be displayed alongside the statusText. (Can be translated on the Tenant side)
-    - `buttonText` - The text that will be used in the button on the onboarding pge. (Can be translated on the Tenant side)
+    - `buttonText` - The text that will be used in the button on the onboarding page. (Can be translated on the Tenant side)
     - `buttonInfo` - An additional text that can be displayed alongside the buttonText. (Can be translated on the Tenant side)
 
 Further reading: https://spryker.atlassian.net/wiki/spaces/AOP/pages/4179623996
@@ -114,7 +114,7 @@ This plugin can be added to the `\Pyz\Glue\GlueBackendApiApplication\GlueBackend
 
 #### InformTenantAboutMerchantAppOnboardingReadinessConfigurationAfterSavePlugin
 
-This plugin can be added to the `\Pyz\Zed\AppKernel\AppKernelDependencyProvider::getConfigurationAfterSavePlugins()` that is explained in the AppKernel documentation. When this plugin is used and the configuration of an App gets created/updated the `ReadyForMerchantAppOnboarding` message will be sent to the Tenant. See Tenant Onboarding.
+This plugin can be added to the `\Pyz\Zed\AppKernel\AppKernelDependencyProvider::getConfigurationAfterSavePlugins()` that is explained in the [AppKernel](https://github.com/spryker/app-kernel) documentation. When this plugin is used and the configuration of an App gets created/updated the `ReadyForMerchantAppOnboarding` message will be sent to the Tenant. See Tenant Onboarding.
 
 #### MerchantsPaymentTransmissionsRequestExtenderPlugin
 
