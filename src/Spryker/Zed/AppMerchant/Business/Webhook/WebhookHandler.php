@@ -44,7 +44,13 @@ class WebhookHandler
             $webhookRequestTransfer = $this->extendWebhookRequestTransfer($webhookRequestTransfer);
             $webhookResponseTransfer = $this->appMerchantPlatformPlugin->handleWebhook($webhookRequestTransfer, $webhookResponseTransfer);
         } catch (Throwable $throwable) {
-            $this->getLogger()->error($throwable->getMessage());
+            $this->getLogger()->error(
+                $throwable->getMessage(),
+                [
+                    'request_data' => $webhookRequestTransfer->toArray(),
+                    WebhookRequestTransfer::TENANT_IDENTIFIER => $webhookRequestTransfer->getTenantIdentifier(),
+                ],
+            );
             $webhookResponseTransfer = new WebhookResponseTransfer();
             $webhookResponseTransfer
                 ->setIsSuccessful(false)
@@ -101,7 +107,7 @@ class WebhookHandler
         $merchantTransfer = $this->appMerchantRepository->findMerchant($merchantCriteriaTransfer);
 
         if ($merchantTransfer instanceof MerchantTransfer && $this->requiresUpdate($merchantTransfer, $merchantAppOnboardingTransfer)) {
-            $config = $merchantTransfer->getConfig() ?? [];
+            $config = $merchantTransfer->getConfig();
             $config[AppMerchantConfig::MERCHANT_ONBOARDING_STATUS] = $merchantAppOnboardingTransfer->getStatus();
             $merchantTransfer->setConfig($config);
 
@@ -113,7 +119,7 @@ class WebhookHandler
 
     protected function requiresUpdate(MerchantTransfer $merchantTransfer, MerchantAppOnboardingTransfer $merchantAppOnboardingTransfer): bool
     {
-        if ($merchantTransfer->getConfig() === null || $merchantTransfer->getConfig() === []) {
+        if ($merchantTransfer->getConfig() === []) {
             return true;
         }
 
