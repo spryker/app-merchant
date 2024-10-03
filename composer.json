@@ -41,12 +41,6 @@
         "spryker/code-sniffer": "*",
         "spryker/container": "*",
         "spryker/development": "^3.34.0",
-        "spryker/event-dispatcher": "^1.6",
-        "spryker/glue-backend-api-application": "*",
-        "spryker/http": "^1.11",
-        "spryker/message-broker-aws": "*",
-        "spryker/propel": "*",
-        "spryker/router": "^1.19",
         "spryker/testify": "*",
         "spryker/testify-async-api": "*"
     },
