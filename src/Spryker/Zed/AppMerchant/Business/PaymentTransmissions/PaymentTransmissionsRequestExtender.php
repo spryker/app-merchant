@@ -8,6 +8,7 @@
 namespace Spryker\Zed\AppMerchant\Business\PaymentTransmissions;
 
 use ArrayObject;
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\PaymentTransmissionsRequestTransfer;
@@ -64,11 +65,11 @@ class PaymentTransmissionsRequestExtender
             return $paymentTransmissionsRequestTransfer;
         }
 
-        $merchantTransfers = $this->findMerchants($merchantReferences, $paymentTransmissionsRequestTransfer->getTenantIdentifierOrFail());
+        $merchantCollectionTransfer = $this->getMerchantCollection($merchantReferences, $paymentTransmissionsRequestTransfer->getTenantIdentifierOrFail());
 
         foreach ($paymentTransmissionItemsGroupedByOrderReferenceAndMerchant as $paymentTransmissionItemsGrouped) {
             foreach ($paymentTransmissionItemsGrouped as $merchantReference => $merchantData) {
-                $merchantTransfer = $this->findMerchantForPaymentTransmissionItem($merchantTransfers, $merchantReference);
+                $merchantTransfer = $this->findMerchantForPaymentTransmissionItem($merchantCollectionTransfer, $merchantReference);
 
                 if (!$merchantTransfer instanceof MerchantTransfer) {
                     $paymentTransmissionTransfer = $this->createFailedPaymentTransmissionTransfer($merchantData, $merchantReference);
@@ -77,7 +78,7 @@ class PaymentTransmissionsRequestExtender
                     continue;
                 }
 
-                $paymentTransmissionTransfer = $this->createSuccessfulPaymentTransmissionTransfer($merchantData, $merchantTransfers, $merchantReference);
+                $paymentTransmissionTransfer = $this->createSuccessfulPaymentTransmissionTransfer($merchantData, $merchantCollectionTransfer, $merchantReference);
                 $paymentTransmissionsRequestTransfer->addPaymentTransmission($paymentTransmissionTransfer);
             }
         }
@@ -85,14 +86,11 @@ class PaymentTransmissionsRequestExtender
         return $paymentTransmissionsRequestTransfer;
     }
 
-    /**
-     * @param array<\Generated\Shared\Transfer\MerchantTransfer> $merchantTransfers
-     */
     protected function findMerchantForPaymentTransmissionItem(
-        array $merchantTransfers,
+        MerchantCollectionTransfer $merchantCollectionTransfer,
         string $merchantReference
     ): ?MerchantTransfer {
-        foreach ($merchantTransfers as $merchantTransfer) {
+        foreach ($merchantCollectionTransfer->getMerchants() as $merchantTransfer) {
             if ($merchantReference === $merchantTransfer->getMerchantReferenceOrFail()) {
                 return $merchantTransfer;
             }
@@ -103,16 +101,14 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param list<string> $merchantReferences
-     *
-     * @return array<\Generated\Shared\Transfer\MerchantTransfer>
      */
-    protected function findMerchants(array $merchantReferences, string $tenantIdentifier): array
+    protected function getMerchantCollection(array $merchantReferences, string $tenantIdentifier): MerchantCollectionTransfer
     {
         $merchantCriteriaTransfer = (new MerchantCriteriaTransfer())
             ->setMerchantReferences($merchantReferences)
             ->setTenantIdentifier($tenantIdentifier);
 
-        return $this->appMerchantRepository->findMerchants($merchantCriteriaTransfer);
+        return $this->appMerchantRepository->getMerchantCollection($merchantCriteriaTransfer);
     }
 
     /**
@@ -154,17 +150,16 @@ class PaymentTransmissionsRequestExtender
 
     /**
      * @param array<mixed> $merchantData
-     * @param array<\Generated\Shared\Transfer\MerchantTransfer> $merchantTransfers
      */
     public function createSuccessfulPaymentTransmissionTransfer(
         array $merchantData,
-        array $merchantTransfers,
+        MerchantCollectionTransfer $merchantCollectionTransfer,
         string $merchantReference
     ): PaymentTransmissionTransfer {
         $paymentTransmissionTransfer = $merchantData[static::KEY_PAYMENT_TRANSMISSION];
         $paymentTransmissionTransfer
             ->setPaymentTransmissionItems(new ArrayObject($merchantData[static::KEY_PAYMENT_TRANSMISSION_ITEMS]))
-            ->setMerchant($this->findMerchantForPaymentTransmissionItem($merchantTransfers, $merchantReference))
+            ->setMerchant($this->findMerchantForPaymentTransmissionItem($merchantCollectionTransfer, $merchantReference))
             ->setMerchantReference($merchantReference);
 
         return $paymentTransmissionTransfer;

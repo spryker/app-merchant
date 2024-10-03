@@ -7,8 +7,10 @@
 
 namespace Spryker\Zed\AppMerchant\Persistence;
 
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
+use Orm\Zed\AppMerchant\Persistence\SpyMerchantQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -18,12 +20,12 @@ class AppMerchantRepository extends AbstractRepository implements AppMerchantRep
 {
     public function findMerchant(MerchantCriteriaTransfer $merchantCriteriaTransfer): ?MerchantTransfer
     {
-        $spyMerchantQuery = $this->getFactory()->createMerchantQuery();
-        $merchantEntity = $spyMerchantQuery
-            ->filterByMerchantReference($merchantCriteriaTransfer->getMerchantReferenceOrFail())
-            ->filterByTenantIdentifier($merchantCriteriaTransfer->getTenantIdentifierOrFail());
+        $spyMerchantQuery = $this->applyMerchantCriteria(
+            $this->getFactory()->createMerchantQuery(),
+            $merchantCriteriaTransfer,
+        );
 
-        $merchantEntity = $merchantEntity->findOne();
+        $merchantEntity = $spyMerchantQuery->findOne();
 
         if ($merchantEntity === null) {
             return null;
@@ -33,26 +35,36 @@ class AppMerchantRepository extends AbstractRepository implements AppMerchantRep
             ->mapMerchantEntityToMerchantTransfer($merchantEntity, new MerchantTransfer());
     }
 
-    /**
-     * @return array<\Generated\Shared\Transfer\MerchantTransfer>
-     */
-    public function findMerchants(MerchantCriteriaTransfer $merchantCriteriaTransfer): array
-    {
-        $spyMerchantQuery = $this->getFactory()->createMerchantQuery();
-        $merchantEntityQuery = $spyMerchantQuery
-            ->filterByMerchantReference_In($merchantCriteriaTransfer->getMerchantReferences())
-            ->filterByTenantIdentifier($merchantCriteriaTransfer->getTenantIdentifierOrFail());
+    public function getMerchantCollection(
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): MerchantCollectionTransfer {
+        $spyMerchantQuery = $this->applyMerchantCriteria(
+            $this->getFactory()->createMerchantQuery(),
+            $merchantCriteriaTransfer,
+        );
 
-        $merchantEntityCollection = $merchantEntityQuery->find();
+        $merchantEntityCollection = $spyMerchantQuery->find();
 
-        $merchantTransfers = [];
+        return $this->getFactory()->createMerchantMapper()
+            ->mapMerchantEntityCollectionToMerchantCollectionTransfer($merchantEntityCollection, new MerchantCollectionTransfer());
+    }
 
-        /** @var \Orm\Zed\AppMerchant\Persistence\SpyMerchant $merchantEntity */
-        foreach ($merchantEntityCollection as $merchantEntity) {
-            $merchantTransfers[] = $this->getFactory()->createMerchantMapper()
-                ->mapMerchantEntityToMerchantTransfer($merchantEntity, new MerchantTransfer());
+    protected function applyMerchantCriteria(
+        SpyMerchantQuery $spyMerchantQuery,
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): SpyMerchantQuery {
+        if ($merchantCriteriaTransfer->getMerchantReference() !== null && $merchantCriteriaTransfer->getMerchantReference() !== '' && $merchantCriteriaTransfer->getMerchantReference() !== '0') {
+            $spyMerchantQuery->filterByMerchantReference($merchantCriteriaTransfer->getMerchantReference());
         }
 
-        return $merchantTransfers;
+        if ($merchantCriteriaTransfer->getMerchantReferences() !== null && $merchantCriteriaTransfer->getMerchantReferences() !== []) {
+            $spyMerchantQuery->filterByMerchantReference_In($merchantCriteriaTransfer->getMerchantReferences());
+        }
+
+        if ($merchantCriteriaTransfer->getTenantIdentifier() !== null && $merchantCriteriaTransfer->getTenantIdentifier() !== '' && $merchantCriteriaTransfer->getTenantIdentifier() !== '0') {
+            $spyMerchantQuery->filterByTenantIdentifier($merchantCriteriaTransfer->getTenantIdentifier());
+        }
+
+        return $spyMerchantQuery;
     }
 }

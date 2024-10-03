@@ -9,6 +9,8 @@ namespace Spryker\Glue\AppMerchantBackendApi\Dependency\Facade;
 
 use Generated\Shared\Transfer\MerchantAppOnboardingRequestTransfer;
 use Generated\Shared\Transfer\MerchantAppOnboardingResponseTransfer;
+use Generated\Shared\Transfer\MerchantCollectionTransfer;
+use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 
 class AppMerchantBackendApiToAppMerchantFacadeBridge implements AppMerchantBackendApiToAppMerchantFacadeInterface
 {
@@ -29,5 +31,11 @@ class AppMerchantBackendApiToAppMerchantFacadeBridge implements AppMerchantBacke
         MerchantAppOnboardingRequestTransfer $merchantAppOnboardingRequestTransfer
     ): MerchantAppOnboardingResponseTransfer {
         return $this->appMerchantFacade->createMerchantAppOnboarding($merchantAppOnboardingRequestTransfer);
+    }
+
+    public function getMerchantCollection(
+        MerchantCriteriaTransfer $merchantCriteriaTransfer
+    ): MerchantCollectionTransfer {
+        return $this->appMerchantFacade->getMerchantCollection($merchantCriteriaTransfer);
     }
 }

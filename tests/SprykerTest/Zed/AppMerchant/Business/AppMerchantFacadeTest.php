@@ -8,8 +8,10 @@
 namespace SprykerTest\Zed\AppMerchant\Business;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\AppConfigTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantTransfer;
+use Ramsey\Uuid\Uuid;
 use SprykerTest\Zed\AppMerchant\AppMerchantBusinessTester;
 
 /**
@@ -66,5 +68,38 @@ class AppMerchantFacadeTest extends Unit
 
         // Assert
         $this->tester->assertNull($merchantTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeleteMerchantByAppConfigRemovesAllTheMerchantsForTenantIdentifierSpecifiedInAppConfig(): void
+    {
+        // Arrange
+        $tenantIdentifierToDelete = Uuid::uuid4()->toString();
+        $tenantIdentifierToCheck = Uuid::uuid4()->toString();
+
+        $merchantTransferToDelete = $this->tester->haveMerchantPersisted([
+            MerchantTransfer::TENANT_IDENTIFIER => $tenantIdentifierToDelete,
+        ]);
+        $merchantTransferToCheck = $this->tester->haveMerchantPersisted([
+            MerchantTransfer::TENANT_IDENTIFIER => $tenantIdentifierToCheck,
+        ]);
+
+        // Act
+        $this->tester->getFacade()->deleteMerchantByAppConfig(
+            (new AppConfigTransfer())->setTenantIdentifier($tenantIdentifierToDelete),
+        );
+        $foundMerchantTransferToDelete = $this->tester->getFacade()->findMerchant(
+            (new MerchantCriteriaTransfer())->setTenantIdentifier($tenantIdentifierToDelete),
+        );
+        $foundMerchantTransferToCheck = $this->tester->getFacade()->findMerchant(
+            (new MerchantCriteriaTransfer())->setTenantIdentifier($tenantIdentifierToCheck),
+        );
+
+        // Assert
+        $this->tester->assertNull($foundMerchantTransferToDelete);
+        $this->tester->assertNotNull($foundMerchantTransferToCheck);
+        $this->tester->assertSame($merchantTransferToCheck->getMerchantReference(), $foundMerchantTransferToCheck->getMerchantReference());
     }
 }

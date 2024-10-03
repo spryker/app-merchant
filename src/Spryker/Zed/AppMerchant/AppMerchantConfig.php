@@ -9,6 +9,7 @@ namespace Spryker\Zed\AppMerchant;
 
 use Spryker\Glue\AppMerchantBackendApi\Plugin\GlueApplication\MerchantAppOnboardingBackendApiRouteProviderPlugin;
 use Spryker\Shared\AppKernel\AppKernelConstants;
+use Spryker\Shared\AppMerchant\AppMerchantConstants;
 use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
@@ -54,5 +55,11 @@ class AppMerchantConfig extends AbstractBundleConfig
         return [
             'account',
         ];
+    }
+
+    public function getIsTenantMerchantsDeletionAfterDisconnectionEnabled(): bool
+    {
+        /** @phpstan-var bool */
+        return $this->get(AppMerchantConstants::IS_TENANT_MERCHANTS_DELETION_AFTER_DISCONNECTION_ENABLED, false);
     }
 }
