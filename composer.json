@@ -5,8 +5,8 @@
     "license": "proprietary",
     "require": {
         "php": ">=8.2",
-        "spryker/app-kernel": "dev-feature/acp-2930/master-stripe-app-disconnection-criteria as 2.1.0",
-        "spryker/app-payment": "^1.1.0 || ^2.0.0",
+        "spryker/app-kernel": "^2.1.0",
+        "spryker/app-payment": "^2.0.0",
         "spryker/app-webhook": "^1.0.0",
         "spryker/event-dispatcher": "^1.6.0",
         "spryker/glue-application-extension": "^1.0.0",
